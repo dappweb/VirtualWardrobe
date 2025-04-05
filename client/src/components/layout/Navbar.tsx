@@ -21,7 +21,7 @@ import LanguageSwitcher from "./LanguageSwitcher";
 import VirtualWallet from "@/components/user/VirtualWallet";
 
 export default function Navbar() {
-  const [location] = useLocation();
+  const [location, navigate] = useLocation();
   const { user, logoutMutation } = useAuth();
   const { t } = useTranslation();
 
@@ -52,39 +52,36 @@ export default function Navbar() {
               </Link>
             </div>
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-              <Link href="/">
-                <a
-                  className={`${
-                    isActive("/")
-                      ? "border-accent-500 text-neutral-900"
-                      : "border-transparent text-neutral-500 hover:border-neutral-300 hover:text-neutral-700"
-                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
-                >
-                  {t('nav.home')}
-                </a>
-              </Link>
-              <Link href="/brands">
-                <a
-                  className={`${
-                    isActive("/brands")
-                      ? "border-accent-500 text-neutral-900"
-                      : "border-transparent text-neutral-500 hover:border-neutral-300 hover:text-neutral-700"
-                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
-                >
-                  {t('nav.brands')}
-                </a>
-              </Link>
-              <Link href="/assets">
-                <a
-                  className={`${
-                    isActive("/assets")
-                      ? "border-accent-500 text-neutral-900"
-                      : "border-transparent text-neutral-500 hover:border-neutral-300 hover:text-neutral-700"
-                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
-                >
-                  {t('nav.assets')}
-                </a>
-              </Link>
+              <div
+                className={`${
+                  isActive("/")
+                    ? "border-accent-500 text-neutral-900"
+                    : "border-transparent text-neutral-500 hover:border-neutral-300 hover:text-neutral-700"
+                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+                onClick={() => navigate('/')}
+              >
+                {t('nav.home')}
+              </div>
+              <div
+                className={`${
+                  isActive("/brands")
+                    ? "border-accent-500 text-neutral-900"
+                    : "border-transparent text-neutral-500 hover:border-neutral-300 hover:text-neutral-700"
+                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium cursor-pointer`}
+                onClick={() => navigate('/brands')}
+              >
+                {t('nav.brands')}
+              </div>
+              <div
+                className={`${
+                  isActive("/assets")
+                    ? "border-accent-500 text-neutral-900"
+                    : "border-transparent text-neutral-500 hover:border-neutral-300 hover:text-neutral-700"
+                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium cursor-pointer`}
+                onClick={() => navigate('/assets')}
+              >
+                {t('nav.assets')}
+              </div>
               <a
                 href="#how-it-works"
                 className="border-transparent text-neutral-500 hover:border-neutral-300 hover:text-neutral-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
@@ -169,35 +166,32 @@ export default function Navbar() {
                   </div>
                   
                   <div className="space-y-3">
-                    <SheetClose asChild>
-                      <Link href="/">
-                        <Button 
-                          variant={isActive("/") ? "default" : "ghost"} 
-                          className="w-full justify-start"
-                        >
-                          {t('nav.home')}
-                        </Button>
-                      </Link>
+                    <SheetClose>
+                      <Button 
+                        variant={isActive("/") ? "default" : "ghost"} 
+                        className="w-full justify-start"
+                        onClick={() => navigate("/")}
+                      >
+                        {t('nav.home')}
+                      </Button>
                     </SheetClose>
-                    <SheetClose asChild>
-                      <Link href="/brands">
-                        <Button 
-                          variant={isActive("/brands") ? "default" : "ghost"} 
-                          className="w-full justify-start"
-                        >
-                          {t('nav.brands')}
-                        </Button>
-                      </Link>
+                    <SheetClose>
+                      <Button 
+                        variant={isActive("/brands") ? "default" : "ghost"} 
+                        className="w-full justify-start"
+                        onClick={() => navigate("/brands")}
+                      >
+                        {t('nav.brands')}
+                      </Button>
                     </SheetClose>
-                    <SheetClose asChild>
-                      <Link href="/assets">
-                        <Button 
-                          variant={isActive("/assets") ? "default" : "ghost"} 
-                          className="w-full justify-start"
-                        >
-                          {t('nav.assets')}
-                        </Button>
-                      </Link>
+                    <SheetClose>
+                      <Button 
+                        variant={isActive("/assets") ? "default" : "ghost"} 
+                        className="w-full justify-start"
+                        onClick={() => navigate("/assets")}
+                      >
+                        {t('nav.assets')}
+                      </Button>
                     </SheetClose>
                     <Button variant="ghost" className="w-full justify-start">
                       {t('nav.about')}
@@ -214,12 +208,14 @@ export default function Navbar() {
                           </div>
                         )}
                       
-                        <SheetClose asChild>
-                          <Link href="/profile">
-                            <Button variant="outline" className="w-full">
-                              {t('profile.title')}
-                            </Button>
-                          </Link>
+                        <SheetClose>
+                          <Button 
+                            variant="outline" 
+                            className="w-full"
+                            onClick={() => navigate("/profile")}
+                          >
+                            {t('profile.title')}
+                          </Button>
                         </SheetClose>
                         <Button 
                           variant="destructive" 
@@ -231,19 +227,23 @@ export default function Navbar() {
                       </>
                     ) : (
                       <>
-                        <SheetClose asChild>
-                          <Link href="/auth">
-                            <Button variant="default" className="w-full">
-                              {t('profile.wallet.connectWallet')}
-                            </Button>
-                          </Link>
+                        <SheetClose>
+                          <Button 
+                            variant="default" 
+                            className="w-full"
+                            onClick={() => navigate("/auth")}
+                          >
+                            {t('profile.wallet.connectWallet')}
+                          </Button>
                         </SheetClose>
-                        <SheetClose asChild>
-                          <Link href="/auth">
-                            <Button variant="outline" className="w-full">
-                              {t('nav.login')}
-                            </Button>
-                          </Link>
+                        <SheetClose>
+                          <Button 
+                            variant="outline" 
+                            className="w-full"
+                            onClick={() => navigate("/auth")}
+                          >
+                            {t('nav.login')}
+                          </Button>
                         </SheetClose>
                       </>
                     )}

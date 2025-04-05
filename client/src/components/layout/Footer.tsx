@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-1">
             <h2 className="text-2xl font-display font-bold text-white">
-              FABRIC<span className="text-accent-300">VERSE</span>
+              Chuang<span className="text-accent-300">SiQi</span>
             </h2>
             <p className="mt-2 text-sm text-neutral-300">
               Bridging fashion's physical and digital worlds through blockchain-verified assets.

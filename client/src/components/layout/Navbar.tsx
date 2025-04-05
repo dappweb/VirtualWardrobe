@@ -47,7 +47,7 @@ export default function Navbar() {
             <div className="flex-shrink-0 flex items-center">
               <Link href="/">
                 <h1 className="text-2xl font-display font-bold text-primary-700 cursor-pointer">
-                  FABRIC<span className="text-accent-500">VERSE</span>
+                  Chuang<span className="text-accent-500">SiQi</span>
                 </h1>
               </Link>
             </div>
@@ -157,7 +157,7 @@ export default function Navbar() {
                 <div className="py-4 flex flex-col h-full">
                   <div className="flex items-center justify-between mb-8">
                     <h1 className="text-xl font-display font-bold text-primary-700">
-                      FABRIC<span className="text-accent-500">VERSE</span>
+                      Chuang<span className="text-accent-500">SiQi</span>
                     </h1>
                     <SheetClose className="rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none">
                       <X className="h-5 w-5" />

@@ -1,5 +1,5 @@
 /**
- * FABRICVERSE - 数据库初始化脚本
+ * 创思奇 (ChuangSiQi) - 数据库初始化脚本
  * 
  * 此脚本用于在部署平台时初始化测试数据
  * 可在开发或测试环境中使用
@@ -116,8 +116,8 @@ module.exports = {
 
 // 如果直接运行此脚本，则打印初始化数据
 if (require.main === module) {
-  console.log("FABRICVERSE 数据库初始化脚本");
-  console.log("===========================");
+  console.log("创思奇 (ChuangSiQi) 数据库初始化脚本");
+  console.log("===================================");
   console.log("\n预设用户数据:");
   console.table(users);
   console.log("\n预设品牌数据:");

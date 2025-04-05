@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * FABRICVERSE 平台安装脚本
+ * ChuangSiQi (创思奇) 平台安装脚本
  * 
  * 此脚本会引导用户完成平台的安装和初始设置
  */
@@ -17,7 +17,7 @@ const rl = readline.createInterface({
 });
 
 console.log("\n============================================");
-console.log("   FABRICVERSE 平台安装向导");
+console.log("   创思奇 (ChuangSiQi) 平台安装向导");
 console.log("============================================\n");
 
 const config = {
@@ -98,7 +98,7 @@ function buildProject() {
 
 function showCompletionMessage() {
   console.log("\n============================================");
-  console.log("   🎉 FABRICVERSE 平台安装完成!");
+  console.log("   🎉 创思奇 (ChuangSiQi) 平台安装完成!");
   console.log("============================================\n");
   console.log("您可以通过以下命令启动平台:");
   console.log("\n  开发模式:  npm run dev");

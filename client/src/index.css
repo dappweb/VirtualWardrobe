@@ -46,4 +46,13 @@
     border-radius: 0.5rem;
     z-index: -1;
   }
+  
+  /* Custom animations */
+  @keyframes growUp {
+    from { height: 0; }
+  }
+  
+  .animate-grow-up {
+    animation: growUp 1.5s ease-out forwards;
+  }
 }

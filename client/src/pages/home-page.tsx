@@ -13,12 +13,28 @@ export default function HomePage() {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-grow">
-        <Hero />
-        <Web3Stats />
-        <FeaturedBrands />
-        <AssetCollection />
-        <FinancialInsights />
-        <HowItWorks />
+        {/* 主要视觉部分 */}
+        <div className="bg-gradient-to-b from-white to-neutral-50">
+          <Hero />
+          <Web3Stats />
+        </div>
+        
+        {/* 资产与品牌展示部分 */}
+        <div className="relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-neutral-50 to-white z-0"></div>
+          <div className="relative z-10">
+            <AssetCollection />
+            <FeaturedBrands />
+          </div>
+        </div>
+        
+        {/* 金融与工作原理部分 */}
+        <div className="bg-gradient-to-b from-white to-neutral-50">
+          <FinancialInsights />
+          <HowItWorks />
+        </div>
+        
+        {/* 注册呼吁部分 */}
         <RegisterCTA />
       </main>
       <Footer />

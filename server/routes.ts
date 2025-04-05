@@ -8,6 +8,36 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Setup authentication routes
   setupAuth(app);
 
+  // Update user (for wallet connection)
+  app.put("/api/user", async (req, res) => {
+    if (!req.isAuthenticated()) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    
+    try {
+      const userId = req.user!.id;
+      const updateSchema = z.object({
+        walletAddress: z.string(),
+      });
+      
+      const validatedData = updateSchema.parse(req.body);
+      const updatedUser = await storage.updateUser(userId, {
+        walletAddress: validatedData.walletAddress
+      });
+      
+      if (!updatedUser) {
+        return res.status(404).json({ error: "User not found" });
+      }
+      
+      res.json(updatedUser);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ error: "Invalid data format", details: error.errors });
+      }
+      res.status(500).json({ error: "Failed to update user" });
+    }
+  });
+
   // Brands API
   app.get("/api/brands", async (req, res) => {
     try {

@@ -1,103 +1,123 @@
-import { useState } from "react";
-import { useAuth } from "@/hooks/use-auth";
-import { User } from "@/types";
-import { Wallet, CheckCircle, AlertCircle } from "lucide-react";
+import { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { useToast } from "@/hooks/use-toast";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { useWeb3Auth } from "@/hooks/use-web3-auth";
+import { Loader2 } from "lucide-react";
+import { WalletType } from '@/services/web3Service';
+import { User } from '@/types';
 
 interface WalletConnectProps {
   user: User | null;
 }
 
-// Mock web3 wallet functionality for MVP
-const mockWeb3Wallet = {
-  isConnected: false,
-  connect: async (): Promise<string> => {
-    // Simulate wallet connection delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // Generate random wallet address for demo
-    const randomAddress = "0x" + Array.from({ length: 40 }, () => 
-      Math.floor(Math.random() * 16).toString(16)).join('');
-    
-    return randomAddress;
-  }
-};
-
 export default function WalletConnect({ user }: WalletConnectProps) {
-  const { connectWalletMutation } = useAuth();
-  const { toast } = useToast();
-  const [isConnecting, setIsConnecting] = useState(false);
-  
-  const handleConnectWallet = async () => {
+  const { isConnected, address, walletType, connect, disconnect, login, isLoading, error } = useWeb3Auth();
+  const [selectedWallet, setSelectedWallet] = useState<WalletType | null>(null);
+
+  // 处理连接钱包
+  const handleConnect = async (type: WalletType) => {
+    setSelectedWallet(type);
     try {
-      setIsConnecting(true);
-      
-      // Call mock wallet connection
-      const walletAddress = await mockWeb3Wallet.connect();
-      
-      // Update user profile with wallet address
-      connectWalletMutation.mutate({ walletAddress });
-    } catch (error) {
-      toast({
-        title: "Wallet Connection Failed",
-        description: "Could not connect to your wallet. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsConnecting(false);
+      await connect(type);
+    } catch (err) {
+      console.error('Failed to connect wallet:', err);
+      setSelectedWallet(null);
     }
   };
-  
-  const truncateAddress = (address: string) => {
-    if (!address) return "";
-    return `${address.substring(0, 6)}...${address.substring(address.length - 4)}`;
+
+  // 处理登录
+  const handleLogin = async () => {
+    try {
+      await login();
+    } catch (err) {
+      console.error('Failed to login with wallet:', err);
+    }
   };
-  
+
   return (
-    <Card className="bg-white">
-      <CardHeader className="pb-2">
-        <CardTitle className="text-lg flex items-center">
-          <Wallet className="mr-2 h-5 w-5" />
-          Wallet Connection
-        </CardTitle>
+    <Card className="w-full max-w-md mx-auto">
+      <CardHeader>
+        <CardTitle>区块链钱包连接</CardTitle>
         <CardDescription>
-          Connect your crypto wallet to enable purchases
+          连接您的区块链钱包以启用资产交易功能
         </CardDescription>
       </CardHeader>
       <CardContent>
         {user?.walletAddress ? (
-          <div className="bg-green-50 text-green-700 p-3 rounded-md flex items-center">
-            <CheckCircle className="h-5 w-5 mr-2 text-green-500" />
-            <div>
-              <p className="font-medium">Wallet Connected</p>
-              <p className="text-sm">{truncateAddress(user.walletAddress)}</p>
+          <div className="space-y-4">
+            <div className="p-4 bg-secondary rounded-md">
+              <p className="text-sm font-medium">已连接钱包</p>
+              <p className="text-xs text-muted-foreground break-all mt-1">{user.walletAddress}</p>
             </div>
           </div>
-        ) : (
-          <>
-            <div className="bg-amber-50 text-amber-700 p-3 rounded-md flex items-center mb-4">
-              <AlertCircle className="h-5 w-5 mr-2 text-amber-500" />
-              <div>
-                <p className="font-medium">No Wallet Connected</p>
-                <p className="text-sm">Connect your wallet to purchase assets</p>
-              </div>
+        ) : isConnected ? (
+          <div className="space-y-4">
+            <div className="p-4 bg-secondary rounded-md">
+              <p className="text-sm font-medium">已连接钱包</p>
+              <p className="text-xs text-muted-foreground break-all mt-1">{address}</p>
             </div>
+            {!user?.walletAddress && (
+              <Button 
+                className="w-full" 
+                onClick={handleLogin} 
+                disabled={isLoading}
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    正在将钱包与账户关联...
+                  </>
+                ) : (
+                  '关联钱包到当前账户'
+                )}
+              </Button>
+            )}
+          </div>
+        ) : (
+          <div className="space-y-4">
             <Button 
               className="w-full" 
-              onClick={handleConnectWallet}
-              disabled={isConnecting || connectWalletMutation.isPending}
+              variant="outline" 
+              onClick={() => handleConnect('ethereum')}
+              disabled={isLoading || selectedWallet === 'ethereum'}
             >
-              {isConnecting || connectWalletMutation.isPending ? (
-                <>Connecting Wallet...</>
+              {isLoading && selectedWallet === 'ethereum' ? (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               ) : (
-                <>Connect Wallet</>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg" alt="MetaMask" className="h-5 w-5 mr-2" />
               )}
+              连接 MetaMask
             </Button>
-          </>
+            <Button 
+              className="w-full" 
+              variant="outline" 
+              onClick={() => handleConnect('tron')}
+              disabled={isLoading || selectedWallet === 'tron'}
+            >
+              {isLoading && selectedWallet === 'tron' ? (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              ) : (
+                <img src="https://tronweb3.wiki/tronlink-logo.svg" alt="TronLink" className="h-5 w-5 mr-2" />
+              )}
+              连接 TronLink
+            </Button>
+          </div>
+        )}
+        {error && (
+          <p className="text-sm text-destructive mt-2">错误: {error}</p>
         )}
       </CardContent>
+      {isConnected && (
+        <CardFooter>
+          <Button 
+            variant="ghost" 
+            className="w-full"
+            onClick={disconnect}
+          >
+            断开钱包连接
+          </Button>
+        </CardFooter>
+      )}
     </Card>
   );
 }

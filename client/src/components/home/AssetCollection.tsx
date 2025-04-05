@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import {
   Select,
   SelectContent,
@@ -15,6 +16,7 @@ import AssetCard from "../assets/AssetCard";
 import type { AssetWithBrand } from "@/types";
 
 export default function AssetCollection() {
+  const { t } = useTranslation();
   const [category, setCategory] = useState<string>("all");
   const [sortBy, setSortBy] = useState<string>("recentlyAdded");
   
@@ -27,9 +29,11 @@ export default function AssetCollection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between">
           <div>
-            <h2 className="text-3xl font-display font-bold text-neutral-900">Featured Assets</h2>
+            <h2 className="text-3xl font-display font-bold text-neutral-900">
+              {t('home.assetCollection.title')}
+            </h2>
             <p className="mt-2 text-lg text-neutral-500">
-              Discover the most sought-after fashion assets on the platform
+              {t('home.assetCollection.description', 'Discover the most sought-after fashion assets on the platform')}
             </p>
           </div>
           <div className="mt-4 md:mt-0 flex space-x-3">
@@ -38,14 +42,14 @@ export default function AssetCollection() {
               onValueChange={setCategory}
             >
               <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="All Categories" />
+                <SelectValue placeholder={t('assets.categories.all', 'All Categories')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Categories</SelectItem>
-                <SelectItem value="Apparel">Apparel</SelectItem>
-                <SelectItem value="Accessories">Accessories</SelectItem>
-                <SelectItem value="Footwear">Footwear</SelectItem>
-                <SelectItem value="Limited Edition">Limited Edition</SelectItem>
+                <SelectItem value="all">{t('assets.categories.all', 'All Categories')}</SelectItem>
+                <SelectItem value="Apparel">{t('assets.categories.apparel', 'Apparel')}</SelectItem>
+                <SelectItem value="Accessories">{t('assets.categories.accessories', 'Accessories')}</SelectItem>
+                <SelectItem value="Footwear">{t('assets.categories.footwear', 'Footwear')}</SelectItem>
+                <SelectItem value="Limited Edition">{t('assets.categories.limitedEdition', 'Limited Edition')}</SelectItem>
               </SelectContent>
             </Select>
             
@@ -54,13 +58,13 @@ export default function AssetCollection() {
               onValueChange={setSortBy}
             >
               <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Sort By" />
+                <SelectValue placeholder={t('assets.sortBy')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="recentlyAdded">Recently Added</SelectItem>
-                <SelectItem value="priceLowToHigh">Price: Low to High</SelectItem>
-                <SelectItem value="priceHighToLow">Price: High to Low</SelectItem>
-                <SelectItem value="mostPopular">Most Popular</SelectItem>
+                <SelectItem value="recentlyAdded">{t('assets.sortOptions.newest')}</SelectItem>
+                <SelectItem value="priceLowToHigh">{t('assets.sortOptions.priceAsc')}</SelectItem>
+                <SelectItem value="priceHighToLow">{t('assets.sortOptions.priceDesc')}</SelectItem>
+                <SelectItem value="mostPopular">{t('assets.sortOptions.popular')}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -87,7 +91,7 @@ export default function AssetCollection() {
             </div>
           ) : error ? (
             <div className="text-center py-10">
-              <p className="text-red-500">Failed to load assets. Please try again later.</p>
+              <p className="text-red-500">{t('common.error')}: {t('assets.loadError', 'Failed to load assets. Please try again later.')}</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
@@ -101,7 +105,7 @@ export default function AssetCollection() {
         <div className="mt-12 text-center">
           <Link href="/assets">
             <Button variant="outline" className="inline-flex items-center px-6 py-3 text-secondary-700 border-secondary-500">
-              View All Assets
+              {t('home.assetCollection.viewAll')}
               <ArrowRight className="h-5 w-5 ml-2" />
             </Button>
           </Link>

@@ -4,6 +4,7 @@ import { useAuth } from "@/hooks/use-auth";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useTranslation } from "react-i18next";
 import {
   Form,
   FormControl,
@@ -17,23 +18,25 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 
-const formSchema = z.object({
-  email: z.string().email({ message: "Please enter a valid email address" }),
-  password: z.string().min(8, { message: "Password must be at least 8 characters" }),
-  confirmPassword: z.string(),
-  acceptTerms: z.boolean().refine(val => val === true, {
-    message: "You must accept the terms and conditions",
-  }),
-}).refine((data) => data.password === data.confirmPassword, {
-  message: "Passwords don't match",
-  path: ["confirmPassword"],
-});
-
-type FormValues = z.infer<typeof formSchema>;
-
 export default function RegisterCTA() {
+  const { t } = useTranslation();
   const [, navigate] = useLocation();
   const { user, registerMutation } = useAuth();
+  
+  // Form schema with translations
+  const formSchema = z.object({
+    email: z.string().email({ message: t('validation.email', 'Please enter a valid email address') }),
+    password: z.string().min(8, { message: t('validation.password.minLength', 'Password must be at least 8 characters') }),
+    confirmPassword: z.string(),
+    acceptTerms: z.boolean().refine(val => val === true, {
+      message: t('validation.acceptTerms', 'You must accept the terms and conditions'),
+    }),
+  }).refine((data) => data.password === data.confirmPassword, {
+    message: t('validation.password.match', 'Passwords don\'t match'),
+    path: ["confirmPassword"],
+  });
+
+  type FormValues = z.infer<typeof formSchema>;
   
   // If the user is already logged in, don't show the register form
   if (user) {
@@ -59,15 +62,17 @@ export default function RegisterCTA() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-3xl font-bold text-white font-display">
-            Join the Fashion RWA Revolution
+            {t('home.registerCTA.title')}
           </h2>
           <p className="mt-4 text-xl text-white/80">
-            Be among the first to access exclusive digital fashion assets
+            {t('home.registerCTA.subtitle')}
           </p>
         </div>
         <div className="mt-10 max-w-xl mx-auto">
           <div className="bg-white shadow-lg rounded-lg p-6">
-            <h3 className="text-xl font-bold text-neutral-900 mb-4">Create Your Account</h3>
+            <h3 className="text-xl font-bold text-neutral-900 mb-4">
+              {t('auth.register.title')}
+            </h3>
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 <FormField
@@ -75,9 +80,9 @@ export default function RegisterCTA() {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Email</FormLabel>
+                      <FormLabel>{t('auth.register.email')}</FormLabel>
                       <FormControl>
-                        <Input placeholder="your@email.com" {...field} />
+                        <Input placeholder={t('home.registerCTA.emailPlaceholder')} {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -88,7 +93,7 @@ export default function RegisterCTA() {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Password</FormLabel>
+                      <FormLabel>{t('auth.register.password')}</FormLabel>
                       <FormControl>
                         <Input type="password" placeholder="••••••••" {...field} />
                       </FormControl>
@@ -101,7 +106,7 @@ export default function RegisterCTA() {
                   name="confirmPassword"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Confirm Password</FormLabel>
+                      <FormLabel>{t('auth.register.confirmPassword')}</FormLabel>
                       <FormControl>
                         <Input type="password" placeholder="••••••••" {...field} />
                       </FormControl>
@@ -122,7 +127,7 @@ export default function RegisterCTA() {
                       </FormControl>
                       <div className="space-y-1 leading-none">
                         <FormLabel>
-                          I agree to the <a href="#" className="text-secondary-600 hover:text-secondary-500">Terms of Service</a> and <a href="#" className="text-secondary-600 hover:text-secondary-500">Privacy Policy</a>
+                          {t('auth.register.acceptTerms', 'I agree to the')} <a href="#" className="text-secondary-600 hover:text-secondary-500">{t('footer.links.terms')}</a> {t('common.and')} <a href="#" className="text-secondary-600 hover:text-secondary-500">{t('footer.links.privacy')}</a>
                         </FormLabel>
                         <FormMessage />
                       </div>
@@ -130,7 +135,7 @@ export default function RegisterCTA() {
                   )}
                 />
                 <Button type="submit" className="w-full">
-                  Create Account
+                  {t('home.registerCTA.button')}
                 </Button>
               </form>
             </Form>
@@ -141,7 +146,9 @@ export default function RegisterCTA() {
                   <Separator />
                 </div>
                 <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-white text-neutral-500">Or continue with</span>
+                  <span className="px-2 bg-white text-neutral-500">
+                    {t('auth.register.continueWith', 'Or continue with')}
+                  </span>
                 </div>
               </div>
               <div className="mt-6 grid grid-cols-2 gap-3">
@@ -162,11 +169,9 @@ export default function RegisterCTA() {
             
             <div className="mt-6 text-center text-sm">
               <p className="text-neutral-600">
-                Already have an account?{" "}
-                <Link href="/auth">
-                  <a className="font-medium text-secondary-600 hover:text-secondary-500">
-                    Sign in
-                  </a>
+                {t('auth.register.hasAccount')}{" "}
+                <Link to="/auth" className="font-medium text-secondary-600 hover:text-secondary-500">
+                  {t('auth.register.login')}
                 </Link>
               </p>
             </div>

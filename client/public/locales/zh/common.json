@@ -13,42 +13,53 @@
     "hero": {
       "title": "数字时尚的未来",
       "subtitle": "在元宇宙中探索、收集和交易真实世界的时尚资产",
+      "description": "一个革命性的平台，连接实体时尚与数字资产。发现、收集并拥有来自全球最具创新性时尚设计师的独家作品。",
+      "imageAlt": "时尚设计抽象图",
       "cta": "探索资产"
     },
+    "learnMore": "了解更多",
     "featuredBrands": {
       "title": "精选品牌",
+      "description": "探索业内最具创新性时尚品牌的精选系列。",
       "viewAll": "查看全部"
     },
     "assetCollection": {
       "title": "最新数字资产",
+      "description": "发现平台上最受欢迎的时尚资产",
       "viewAll": "查看全部"
     },
     "howItWorks": {
       "title": "如何运作",
+      "description": "了解我们的平台如何连接时尚品牌与数字收藏家",
       "step1": {
-        "title": "连接钱包",
-        "description": "通过连接您的加密钱包，开始探索和交易数字时尚资产"
+        "title": "发现资产",
+        "description": "通过连接您的加密钱包，开始探索和交易数字时尚资产",
+        "longDescription": "浏览我们精选的来自创新品牌和设计师的时尚资产系列。每个资产都代表一个经过验证的真实世界时尚物品。"
       },
       "step2": {
-        "title": "收集数字资产",
-        "description": "浏览各种设计师和品牌提供的独特数字时尚资产"
+        "title": "安心购买",
+        "description": "浏览各种设计师和品牌提供的独特数字时尚资产",
+        "longDescription": "通过区块链验证的所有权安全购买数字资产。选择固定价格选项，交易详情透明，没有隐藏费用。"
       },
       "step3": {
-        "title": "安全交易",
-        "description": "利用区块链技术进行安全、透明的时尚资产交易"
-      }
+        "title": "管理您的收藏",
+        "description": "利用区块链技术进行安全、透明的时尚资产交易",
+        "longDescription": "构建并展示您的个人时尚资产收藏。通过我们直观的管理界面跟踪它们的真实性、历史和价值变化。"
+      },
+      "readGuide": "阅读完整指南"
     },
     "registerCTA": {
-      "title": "加入我们的社区",
-      "subtitle": "注册接收最新的数字时尚更新和独家优惠",
-      "emailPlaceholder": "输入您的电子邮件",
-      "button": "注册"
+      "title": "加入时尚RWA革命",
+      "subtitle": "成为首批访问独家数字时尚资产的用户之一",
+      "emailPlaceholder": "您的邮箱",
+      "button": "创建账户"
     }
   },
   "brands": {
     "title": "时尚品牌",
     "subtitle": "探索顶级时尚品牌及其独特的数字资产",
-    "search": "搜索品牌"
+    "search": "搜索品牌",
+    "loadError": "加载品牌失败，请稍后再试"
   },
   "assets": {
     "title": "数字时尚资产",
@@ -56,13 +67,21 @@
     "search": "搜索资产",
     "filter": "筛选",
     "sortBy": "排序方式",
+    "categories": {
+      "all": "所有类别",
+      "apparel": "服装",
+      "accessories": "配饰",
+      "footwear": "鞋履",
+      "limitedEdition": "限量版"
+    },
     "sortOptions": {
       "newest": "最新",
       "priceAsc": "价格: 低到高",
       "priceDesc": "价格: 高到低",
       "popular": "最受欢迎"
     },
-    "noAssets": "没有找到符合条件的资产"
+    "noAssets": "没有找到符合条件的资产",
+    "loadError": "加载资产失败，请稍后再试"
   },
   "asset": {
     "brand": "品牌",
@@ -117,7 +136,8 @@
     "retry": "重试",
     "viewDetails": "查看详情",
     "language": "语言",
-    "settings": "设置"
+    "settings": "设置",
+    "and": "和"
   },
   "auth": {
     "login": {
@@ -139,8 +159,18 @@
       "confirmPassword": "确认密码",
       "button": "注册",
       "hasAccount": "已有账户？",
-      "login": "登录"
+      "login": "登录",
+      "acceptTerms": "我同意",
+      "continueWith": "或通过以下方式继续"
     },
     "logout": "退出登录"
+  },
+  "validation": {
+    "email": "请输入有效的电子邮件地址",
+    "password": {
+      "minLength": "密码必须至少8个字符",
+      "match": "密码不匹配"
+    },
+    "acceptTerms": "您必须接受条款和条件"
   }
 }

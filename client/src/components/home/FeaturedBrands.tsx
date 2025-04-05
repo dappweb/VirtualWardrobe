@@ -5,8 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import BrandCard from "../brands/BrandCard";
 import type { Brand } from "@/types";
+import { useTranslation } from "react-i18next";
 
 export default function FeaturedBrands() {
+  const { t } = useTranslation();
   const { data: brands, isLoading, error } = useQuery<Brand[]>({
     queryKey: ["/api/brands"],
   });
@@ -15,9 +17,11 @@ export default function FeaturedBrands() {
     <section className="py-12 bg-neutral-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <h2 className="text-3xl font-display font-bold text-neutral-900">Featured Brands</h2>
+          <h2 className="text-3xl font-display font-bold text-neutral-900">
+            {t('home.featuredBrands.title')}
+          </h2>
           <p className="mt-3 max-w-2xl mx-auto text-lg text-neutral-500">
-            Explore curated collections from the most innovative fashion brands in the industry.
+            {t('home.featuredBrands.description', 'Explore curated collections from the most innovative fashion brands in the industry.')}
           </p>
         </div>
 
@@ -49,7 +53,7 @@ export default function FeaturedBrands() {
             </div>
           ) : error ? (
             <div className="text-center py-10">
-              <p className="text-red-500">Failed to load brands. Please try again later.</p>
+              <p className="text-red-500">{t('common.error')}: {t('brands.loadError', 'Failed to load brands. Please try again later.')}</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -63,7 +67,7 @@ export default function FeaturedBrands() {
         <div className="mt-12 text-center">
           <Link href="/brands">
             <Button className="inline-flex items-center px-6 py-3 shadow-sm">
-              View All Brands
+              {t('home.featuredBrands.viewAll')}
             </Button>
           </Link>
         </div>

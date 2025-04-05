@@ -13,42 +13,53 @@
     "hero": {
       "title": "The Future of Digital Fashion",
       "subtitle": "Explore, collect, and trade real-world fashion assets in the metaverse",
+      "description": "A revolutionary platform that bridges the gap between physical fashion and digital assets. Discover, collect, and own exclusive pieces from the world's most innovative fashion designers.",
+      "imageAlt": "Fashion design abstract",
       "cta": "Explore Assets"
     },
+    "learnMore": "Learn More",
     "featuredBrands": {
       "title": "Featured Brands",
+      "description": "Explore curated collections from the most innovative fashion brands in the industry.",
       "viewAll": "View All"
     },
     "assetCollection": {
       "title": "Latest Digital Assets",
+      "description": "Discover the most sought-after fashion assets on the platform",
       "viewAll": "View All"
     },
     "howItWorks": {
       "title": "How It Works",
+      "description": "Discover how our platform connects fashion brands with digital collectors",
       "step1": {
-        "title": "Connect Wallet",
-        "description": "Start exploring and trading digital fashion assets by connecting your crypto wallet"
+        "title": "Discover Assets",
+        "description": "Start exploring and trading digital fashion assets by connecting your crypto wallet",
+        "longDescription": "Browse through our curated collection of fashion assets from innovative brands and designers. Each asset represents a real-world fashion item with verified authenticity."
       },
       "step2": {
-        "title": "Collect Digital Assets",
-        "description": "Browse unique digital fashion assets from various designers and brands"
+        "title": "Purchase with Confidence",
+        "description": "Browse unique digital fashion assets from various designers and brands",
+        "longDescription": "Securely purchase digital assets with blockchain-verified ownership. Choose from fixed price options with transparent transaction details and no hidden fees."
       },
       "step3": {
-        "title": "Trade Securely",
-        "description": "Trade fashion assets securely and transparently using blockchain technology"
-      }
+        "title": "Manage Your Collection",
+        "description": "Trade fashion assets securely and transparently using blockchain technology",
+        "longDescription": "Build and showcase your personal collection of fashion assets. Track their authenticity, history, and value over time through our intuitive management interface."
+      },
+      "readGuide": "Read Our Full Guide"
     },
     "registerCTA": {
-      "title": "Join Our Community",
-      "subtitle": "Sign up to receive the latest digital fashion updates and exclusive offers",
-      "emailPlaceholder": "Enter your email",
-      "button": "Register"
+      "title": "Join the Fashion RWA Revolution",
+      "subtitle": "Be among the first to access exclusive digital fashion assets",
+      "emailPlaceholder": "your@email.com",
+      "button": "Create Account"
     }
   },
   "brands": {
     "title": "Fashion Brands",
     "subtitle": "Explore top fashion brands and their unique digital assets",
-    "search": "Search brands"
+    "search": "Search brands",
+    "loadError": "Failed to load brands. Please try again later."
   },
   "assets": {
     "title": "Digital Fashion Assets",
@@ -56,13 +67,21 @@
     "search": "Search assets",
     "filter": "Filter",
     "sortBy": "Sort by",
+    "categories": {
+      "all": "All Categories",
+      "apparel": "Apparel",
+      "accessories": "Accessories",
+      "footwear": "Footwear",
+      "limitedEdition": "Limited Edition"
+    },
     "sortOptions": {
       "newest": "Newest",
       "priceAsc": "Price: Low to High",
       "priceDesc": "Price: High to Low",
       "popular": "Most Popular"
     },
-    "noAssets": "No assets found matching your criteria"
+    "noAssets": "No assets found matching your criteria",
+    "loadError": "Failed to load assets. Please try again later."
   },
   "asset": {
     "brand": "Brand",
@@ -117,7 +136,8 @@
     "retry": "Retry",
     "viewDetails": "View Details",
     "language": "Language",
-    "settings": "Settings"
+    "settings": "Settings",
+    "and": "and"
   },
   "auth": {
     "login": {
@@ -139,8 +159,18 @@
       "confirmPassword": "Confirm Password",
       "button": "Register",
       "hasAccount": "Already have an account?",
-      "login": "Login"
+      "login": "Login",
+      "acceptTerms": "I agree to the",
+      "continueWith": "Or continue with"
     },
     "logout": "Logout"
+  },
+  "validation": {
+    "email": "Please enter a valid email address",
+    "password": {
+      "minLength": "Password must be at least 8 characters",
+      "match": "Passwords don't match"
+    },
+    "acceptTerms": "You must accept the terms and conditions"
   }
 }

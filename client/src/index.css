@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+  
+  /* Custom fonts */
+  .font-display {
+    font-family: 'Playfair Display', serif;
+  }
+  
+  .font-sans {
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .font-accent {
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  /* Asset card hover effect */
+  .asset-card:hover .asset-overlay {
+    opacity: 1;
+  }
+  
+  /* Gradient border effect */
+  .gradient-border {
+    position: relative;
+    border-radius: 0.375rem;
+  }
+  
+  .gradient-border::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #8B5CF6, #F43F5E);
+    border-radius: 0.5rem;
+    z-index: -1;
+  }
+}

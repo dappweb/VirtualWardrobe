@@ -10,7 +10,7 @@ export default function FinancialInsights() {
     { 
       id: 1, 
       name: "限量设计师夹克", 
-      brand: "创思奇CSQ",
+      brand: "ChuangSiQi CSQ",
       price: 1250, 
       change: 12.4, 
       positive: true,
@@ -237,7 +237,7 @@ export default function FinancialInsights() {
             {/* 注册区域 */}
             <div className="mt-8 bg-primary-900 text-white rounded-xl p-6">
               <h3 className="text-xl font-bold mb-2">
-                {t('home.financial.joinTitle', '加入创思奇，开启数字资产投资')}
+                {t('home.financial.joinTitle', '加入ChuangSiQi，开启数字资产投资')}
               </h3>
               <p className="text-white/80 mb-4">
                 {t('home.financial.joinSubtitle', '无论您是设计师、品牌方还是收藏家，都能从数字化资产中获益')}

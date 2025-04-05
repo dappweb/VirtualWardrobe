@@ -71,7 +71,7 @@ export default function Web3Stats() {
             {t('home.web3Stats.title', '区块链时尚经济')}
           </h2>
           <p className="mt-4 text-lg text-neutral-600 max-w-3xl mx-auto">
-            {t('home.web3Stats.subtitle', '创思奇利用区块链技术重新定义时尚产业，建立透明可信的数字资产交易平台')}
+            {t('home.web3Stats.subtitle', 'ChuangSiQi利用区块链技术重新定义时尚产业，建立透明可信的数字资产交易平台')}
           </p>
         </div>
         
@@ -214,7 +214,7 @@ export default function Web3Stats() {
           
           <div className="mt-6 border-t border-neutral-100 pt-6 flex justify-between text-sm text-neutral-500">
             <div>
-              {t('home.web3Stats.dataSource', '数据来源')}: {t('home.web3Stats.platform', '创思奇平台')}
+              {t('home.web3Stats.dataSource', '数据来源')}: {t('home.web3Stats.platform', 'ChuangSiQi平台')}
             </div>
             <div>
               {t('home.web3Stats.lastUpdated', '最后更新')}: {new Date().toLocaleDateString()}

@@ -65,11 +65,12 @@ export default function FeaturedBrands() {
         </div>
         
         <div className="mt-12 text-center">
-          <Link href="/brands">
-            <Button className="inline-flex items-center px-6 py-3 shadow-sm">
-              {t('home.featuredBrands.viewAll')}
-            </Button>
-          </Link>
+          <Button 
+            className="inline-flex items-center px-6 py-3 shadow-sm"
+            onClick={() => window.location.href = "/brands"}
+          >
+            {t('home.featuredBrands.viewAll')}
+          </Button>
         </div>
       </div>
     </section>

@@ -5,6 +5,8 @@ import FeaturedBrands from "@/components/home/FeaturedBrands";
 import AssetCollection from "@/components/home/AssetCollection";
 import HowItWorks from "@/components/home/HowItWorks";
 import RegisterCTA from "@/components/home/RegisterCTA";
+import Web3Stats from "@/components/home/Web3Stats";
+import FinancialInsights from "@/components/home/FinancialInsights";
 
 export default function HomePage() {
   return (
@@ -12,8 +14,10 @@ export default function HomePage() {
       <Navbar />
       <main className="flex-grow">
         <Hero />
+        <Web3Stats />
         <FeaturedBrands />
         <AssetCollection />
+        <FinancialInsights />
         <HowItWorks />
         <RegisterCTA />
       </main>

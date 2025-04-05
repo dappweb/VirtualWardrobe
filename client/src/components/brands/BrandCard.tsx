@@ -62,12 +62,13 @@ export default function BrandCard({ brand }: BrandCardProps) {
           </div>
         </div>
         <div className="mt-6">
-          <Link href={`/brands/${brand.id}`}>
-            <a className="text-secondary-500 hover:text-secondary-700 font-medium flex items-center">
-              Explore Brand 
-              <ArrowRight className="h-5 w-5 ml-1" />
-            </a>
-          </Link>
+          <div 
+            onClick={() => window.location.href = `/brands/${brand.id}`}
+            className="text-secondary-500 hover:text-secondary-700 font-medium flex items-center cursor-pointer"
+          >
+            Explore Brand 
+            <ArrowRight className="h-5 w-5 ml-1" />
+          </div>
         </div>
       </div>
     </div>

@@ -103,12 +103,14 @@ export default function AssetCollection() {
         </div>
 
         <div className="mt-12 text-center">
-          <Link href="/assets">
-            <Button variant="outline" className="inline-flex items-center px-6 py-3 text-secondary-700 border-secondary-500">
-              {t('home.assetCollection.viewAll')}
-              <ArrowRight className="h-5 w-5 ml-2" />
-            </Button>
-          </Link>
+          <Button 
+            variant="outline" 
+            className="inline-flex items-center px-6 py-3 text-secondary-700 border-secondary-500"
+            onClick={() => window.location.href = "/assets"}
+          >
+            {t('home.assetCollection.viewAll')}
+            <ArrowRight className="h-5 w-5 ml-2" />
+          </Button>
         </div>
       </div>
     </section>

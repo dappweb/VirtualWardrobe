@@ -123,6 +123,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const assetId = parseInt(req.params.id);
       const userId = req.user!.id;
       
+      // 确保用户是普通买家账户
+      if (req.user!.role !== 'buyer') {
+        return res.status(403).json({ error: "只有买家账户可以购买资产" });
+      }
+      
       const asset = await storage.getAsset(assetId);
       if (!asset) {
         return res.status(404).json({ error: "Asset not found" });
@@ -149,6 +154,256 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(201).json({ success: true, userAsset });
     } catch (error) {
       res.status(500).json({ error: "Failed to purchase asset" });
+    }
+  });
+
+  // ===== 租户用户API =====
+  
+  // 注册为租户用户
+  app.post("/api/tenant/register", async (req, res) => {
+    if (!req.isAuthenticated()) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    
+    try {
+      const userId = req.user!.id;
+      
+      // 更新用户为租户角色
+      const updateSchema = z.object({
+        companyName: z.string(),
+        contactPerson: z.string(),
+        phoneNumber: z.string().optional(),
+        email: z.string().email().optional(),
+        address: z.string().optional(),
+        website: z.string().url().optional(),
+        contactInfo: z.string().optional(),
+        businessLicense: z.string().optional(),
+      });
+      
+      const validatedData = updateSchema.parse(req.body);
+      
+      const updatedUser = await storage.updateUser(userId, {
+        role: 'tenant',
+        verificationStatus: 'pending',
+        contactInfo: validatedData.contactInfo || `${validatedData.contactPerson} - ${validatedData.phoneNumber || req.user!.email}`,
+        metadata: {
+          companyName: validatedData.companyName,
+          contactPerson: validatedData.contactPerson,
+          phoneNumber: validatedData.phoneNumber,
+          address: validatedData.address,
+          website: validatedData.website,
+          businessLicense: validatedData.businessLicense,
+        },
+      });
+      
+      if (!updatedUser) {
+        return res.status(404).json({ error: "User not found" });
+      }
+      
+      res.status(201).json({ success: true, user: updatedUser });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ error: "数据格式无效", details: error.errors });
+      }
+      res.status(500).json({ error: "租户注册失败" });
+    }
+  });
+  
+  // 租户创建品牌
+  app.post("/api/tenant/brand", async (req, res) => {
+    if (!req.isAuthenticated()) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    
+    try {
+      const userId = req.user!.id;
+      
+      // 确保用户是已验证的租户
+      if (req.user!.role !== 'tenant' || req.user!.verificationStatus !== 'verified') {
+        return res.status(403).json({ error: "只有已验证的租户账户可以创建品牌" });
+      }
+      
+      // 检查租户是否已有关联品牌
+      const existingBrand = await storage.getBrandByTenant(userId);
+      if (existingBrand) {
+        return res.status(409).json({ error: "您已拥有一个关联品牌", brand: existingBrand });
+      }
+      
+      // 验证并创建品牌
+      const brandSchema = z.object({
+        name: z.string(),
+        description: z.string(),
+        shortDescription: z.string().optional(),
+        logoUrl: z.string().url().optional(),
+        coverImageUrl: z.string().url().optional(),
+      });
+      
+      const validatedData = brandSchema.parse(req.body);
+      
+      const brand = await storage.createBrand({
+        ...validatedData,
+        activeAssets: 0,
+        floorPrice: 0,
+        volume: 0,
+      });
+      
+      // 更新用户关联品牌ID
+      await storage.updateUser(userId, {
+        brandId: brand.id,
+      });
+      
+      res.status(201).json({ success: true, brand });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ error: "数据格式无效", details: error.errors });
+      }
+      res.status(500).json({ error: "品牌创建失败" });
+    }
+  });
+  
+  // 租户发行资产
+  app.post("/api/tenant/assets", async (req, res) => {
+    if (!req.isAuthenticated()) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    
+    try {
+      const userId = req.user!.id;
+      
+      // 确保用户是已验证的租户
+      if (req.user!.role !== 'tenant' || req.user!.verificationStatus !== 'verified') {
+        return res.status(403).json({ error: "只有已验证的租户账户可以发行资产" });
+      }
+      
+      // 获取租户关联的品牌
+      const brand = await storage.getBrandByTenant(userId);
+      if (!brand) {
+        return res.status(404).json({ error: "找不到您的关联品牌，请先创建品牌" });
+      }
+      
+      // 验证资产数据
+      const assetSchema = z.object({
+        name: z.string(),
+        description: z.string(),
+        price: z.number().positive(),
+        imageUrl: z.string().url(),
+        category: z.string().optional(),
+        limited: z.boolean().optional(),
+        editionNumber: z.number().positive().optional(),
+        totalEditions: z.number().positive().optional(),
+        tokenId: z.string().optional(),
+        blockchain: z.string().optional(),
+      });
+      
+      const validatedData = assetSchema.parse(req.body);
+      
+      // 创建资产
+      const asset = await storage.createAsset({
+        ...validatedData,
+        brandId: brand.id,
+      });
+      
+      res.status(201).json({ success: true, asset });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ error: "数据格式无效", details: error.errors });
+      }
+      res.status(500).json({ error: "资产发行失败" });
+    }
+  });
+  
+  // ===== 管理员API =====
+  
+  // 获取所有用户
+  app.get("/api/admin/users", async (req, res) => {
+    if (!req.isAuthenticated()) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    
+    try {
+      // 确保用户是管理员
+      if (req.user!.role !== 'admin') {
+        return res.status(403).json({ error: "只有管理员账户可以访问此API" });
+      }
+      
+      // 根据角色过滤用户
+      const role = req.query.role as string | undefined;
+      
+      let users;
+      if (role) {
+        users = await storage.getUsersByRole(role);
+      } else {
+        users = Array.from((await storage.getUsersByRole('buyer')).concat(
+          await storage.getUsersByRole('tenant'),
+          await storage.getUsersByRole('admin')
+        ));
+      }
+      
+      res.json(users);
+    } catch (error) {
+      res.status(500).json({ error: "获取用户列表失败" });
+    }
+  });
+  
+  // 验证租户
+  app.put("/api/admin/tenant/:id/verify", async (req, res) => {
+    if (!req.isAuthenticated()) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    
+    try {
+      // 确保用户是管理员
+      if (req.user!.role !== 'admin') {
+        return res.status(403).json({ error: "只有管理员账户可以访问此API" });
+      }
+      
+      const tenantId = parseInt(req.params.id);
+      const { verificationStatus } = req.body;
+      
+      if (!['pending', 'verified', 'rejected'].includes(verificationStatus)) {
+        return res.status(400).json({ error: "无效的验证状态" });
+      }
+      
+      const tenant = await storage.verifyTenant(tenantId, verificationStatus);
+      
+      if (!tenant) {
+        return res.status(404).json({ error: "找不到指定租户或不是租户账户" });
+      }
+      
+      res.json({ success: true, tenant });
+    } catch (error) {
+      res.status(500).json({ error: "租户验证失败" });
+    }
+  });
+  
+  // 设置用户角色
+  app.put("/api/admin/user/:id/role", async (req, res) => {
+    if (!req.isAuthenticated()) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    
+    try {
+      // 确保用户是管理员
+      if (req.user!.role !== 'admin') {
+        return res.status(403).json({ error: "只有管理员账户可以访问此API" });
+      }
+      
+      const userId = parseInt(req.params.id);
+      const { role } = req.body;
+      
+      if (!['buyer', 'tenant', 'admin'].includes(role)) {
+        return res.status(400).json({ error: "无效的用户角色" });
+      }
+      
+      const user = await storage.updateUserRole(userId, role);
+      
+      if (!user) {
+        return res.status(404).json({ error: "找不到指定用户" });
+      }
+      
+      res.json({ success: true, user });
+    } catch (error) {
+      res.status(500).json({ error: "用户角色更新失败" });
     }
   });
 

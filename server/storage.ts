@@ -26,11 +26,17 @@ export interface IStorage {
   createUser(user: InsertUser): Promise<User>;
   updateUser(id: number, user: Partial<InsertUser>): Promise<User | undefined>;
   
+  // 用户角色相关
+  getUsersByRole(role: string): Promise<User[]>; // 按角色获取用户
+  updateUserRole(userId: number, role: string): Promise<User | undefined>; // 更新用户角色
+  verifyTenant(userId: number, verificationStatus: string): Promise<User | undefined>; // 验证租户
+  
   // Brands
   getBrands(): Promise<Brand[]>;
   getBrand(id: number): Promise<Brand | undefined>;
   createBrand(brand: InsertBrand): Promise<Brand>;
   updateBrand(id: number, brand: Partial<InsertBrand>): Promise<Brand | undefined>;
+  getBrandByTenant(userId: number): Promise<Brand | undefined>; // 根据租户ID获取品牌
   
   // Assets
   getAssets(filters?: Partial<{ brandId: number, category: string }>): Promise<AssetWithBrand[]>;
@@ -205,6 +211,39 @@ export class MemStorage implements IStorage {
     return updatedUser;
   }
   
+  // 用户角色相关的方法
+  async getUsersByRole(role: string): Promise<User[]> {
+    return Array.from(this.users.values()).filter(
+      (user) => user.role === role,
+    );
+  }
+  
+  async updateUserRole(userId: number, role: string): Promise<User | undefined> {
+    const user = this.users.get(userId);
+    if (!user) return undefined;
+    
+    const updatedUser = { ...user, role };
+    this.users.set(userId, updatedUser);
+    return updatedUser;
+  }
+  
+  async verifyTenant(userId: number, verificationStatus: string): Promise<User | undefined> {
+    const user = this.users.get(userId);
+    if (!user) return undefined;
+    
+    // 只有租户类型的用户可以被验证
+    if (user.role !== 'tenant') return undefined;
+    
+    const updatedUser = { 
+      ...user, 
+      verificationStatus,
+      verifiedAt: verificationStatus === 'verified' ? new Date() : null
+    };
+    
+    this.users.set(userId, updatedUser);
+    return updatedUser;
+  }
+  
   // Brand methods
   async getBrands(): Promise<Brand[]> {
     return Array.from(this.brands.values());
@@ -228,6 +267,19 @@ export class MemStorage implements IStorage {
     const updatedBrand = { ...existingBrand, ...brandData };
     this.brands.set(id, updatedBrand);
     return updatedBrand;
+  }
+  
+  async getBrandByTenant(userId: number): Promise<Brand | undefined> {
+    // 获取租户用户
+    const tenant = this.users.get(userId);
+    if (!tenant || tenant.role !== 'tenant') return undefined;
+    
+    // 如果租户已有关联的品牌ID，直接返回
+    if (tenant.brandId) {
+      return this.brands.get(tenant.brandId);
+    }
+    
+    return undefined;
   }
   
   // Asset methods

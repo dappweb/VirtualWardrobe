@@ -2,6 +2,9 @@ import { pgTable, text, serial, integer, boolean, timestamp, json } from "drizzl
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
+// 定义用户角色类型
+export type UserRole = 'buyer' | 'tenant' | 'admin';
+
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
   username: text("username").notNull().unique(),
@@ -9,6 +12,21 @@ export const users = pgTable("users", {
   password: text("password").notNull(),
   walletAddress: text("wallet_address"),
   profileImage: text("profile_image"),
+  role: text("role").notNull().default('buyer'), // 默认为普通用户(buyer)
+  // 租户用户(tenant)特有字段
+  brandId: integer("brand_id"), // 关联的品牌ID（如果是租户用户）
+  verifiedAt: timestamp("verified_at"), // 租户验证时间
+  verificationStatus: text("verification_status").default('pending'), // 验证状态：pending, verified, rejected
+  // 额外信息字段（如企业信息）
+  contactInfo: text("contact_info"),
+  metadata: json("metadata").$type<{
+    companyName?: string; 
+    businessLicense?: string;
+    contactPerson?: string;
+    phoneNumber?: string;
+    address?: string;
+    website?: string;
+  }>(),
 });
 
 export const brands = pgTable("brands", {
@@ -56,6 +74,10 @@ export const insertUserSchema = createInsertSchema(users).pick({
   password: true,
   walletAddress: true,
   profileImage: true,
+  role: true,
+  brandId: true,
+  contactInfo: true,
+  metadata: true,
 });
 
 export const insertBrandSchema = createInsertSchema(brands).pick({

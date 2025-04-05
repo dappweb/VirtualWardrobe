@@ -14,6 +14,10 @@ import ProfilePage from "@/pages/profile-page";
 import NotFound from "@/pages/not-found";
 import { ProtectedRoute } from "./lib/protected-route";
 
+// Thirdweb 相关导入
+import { ThirdwebProvider } from "@thirdweb-dev/react";
+import { Ethereum, Goerli } from "@thirdweb-dev/chains";
+
 function Router() {
   return (
     <Switch>
@@ -30,14 +34,23 @@ function Router() {
 }
 
 function App() {
+  // 实际应用中可能需要从环境变量读取
+  const thirdwebClientId = "your-client-id"; // 在生产环境中应从环境变量获取
+  
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <Web3AuthProvider>
-          <Router />
-          <Toaster />
-        </Web3AuthProvider>
-      </AuthProvider>
+      <ThirdwebProvider 
+        activeChain={Ethereum}
+        supportedChains={[Ethereum, Goerli]}
+        clientId={thirdwebClientId}
+      >
+        <AuthProvider>
+          <Web3AuthProvider>
+            <Router />
+            <Toaster />
+          </Web3AuthProvider>
+        </AuthProvider>
+      </ThirdwebProvider>
     </QueryClientProvider>
   );
 }

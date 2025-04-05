@@ -1,0 +1,146 @@
+{
+  "appName": "FABRICVERSE",
+  "nav": {
+    "home": "Home",
+    "brands": "Brands",
+    "assets": "Assets",
+    "profile": "Profile",
+    "login": "Login",
+    "register": "Register",
+    "about": "About"
+  },
+  "home": {
+    "hero": {
+      "title": "The Future of Digital Fashion",
+      "subtitle": "Explore, collect, and trade real-world fashion assets in the metaverse",
+      "cta": "Explore Assets"
+    },
+    "featuredBrands": {
+      "title": "Featured Brands",
+      "viewAll": "View All"
+    },
+    "assetCollection": {
+      "title": "Latest Digital Assets",
+      "viewAll": "View All"
+    },
+    "howItWorks": {
+      "title": "How It Works",
+      "step1": {
+        "title": "Connect Wallet",
+        "description": "Start exploring and trading digital fashion assets by connecting your crypto wallet"
+      },
+      "step2": {
+        "title": "Collect Digital Assets",
+        "description": "Browse unique digital fashion assets from various designers and brands"
+      },
+      "step3": {
+        "title": "Trade Securely",
+        "description": "Trade fashion assets securely and transparently using blockchain technology"
+      }
+    },
+    "registerCTA": {
+      "title": "Join Our Community",
+      "subtitle": "Sign up to receive the latest digital fashion updates and exclusive offers",
+      "emailPlaceholder": "Enter your email",
+      "button": "Register"
+    }
+  },
+  "brands": {
+    "title": "Fashion Brands",
+    "subtitle": "Explore top fashion brands and their unique digital assets",
+    "search": "Search brands"
+  },
+  "assets": {
+    "title": "Digital Fashion Assets",
+    "subtitle": "Discover and collect unique digital fashion assets",
+    "search": "Search assets",
+    "filter": "Filter",
+    "sortBy": "Sort by",
+    "sortOptions": {
+      "newest": "Newest",
+      "priceAsc": "Price: Low to High",
+      "priceDesc": "Price: High to Low",
+      "popular": "Most Popular"
+    },
+    "noAssets": "No assets found matching your criteria"
+  },
+  "asset": {
+    "brand": "Brand",
+    "price": "Price",
+    "limited": "Limited Edition",
+    "edition": "Edition",
+    "createdAt": "Created At",
+    "buyNow": "Buy Now",
+    "connect": "Connect Wallet",
+    "viewOnBlockchain": "View on Blockchain",
+    "details": "Details",
+    "properties": "Properties",
+    "history": "History"
+  },
+  "profile": {
+    "title": "My Collection",
+    "subtitle": "Manage your digital fashion assets and account settings",
+    "tabs": {
+      "assets": "My Assets",
+      "history": "Transaction History"
+    },
+    "wallet": {
+      "title": "Wallet Connection",
+      "subtitle": "Connect your crypto wallet to enable purchases",
+      "connected": "Wallet Connected",
+      "notConnected": "No Wallet Connected",
+      "connectWallet": "Connect Wallet"
+    },
+    "noAssets": {
+      "title": "No assets yet",
+      "description": "Start building your collection by exploring available assets",
+      "cta": "Browse Assets"
+    },
+    "transactionHistory": {
+      "title": "Transaction History",
+      "description": "Track your purchase history and transactions",
+      "comingSoon": "Coming soon in the next platform update"
+    }
+  },
+
+  "footer": {
+    "copyright": "© 2025 FABRICVERSE. All rights reserved.",
+    "links": {
+      "terms": "Terms & Conditions",
+      "privacy": "Privacy Policy",
+      "contact": "Contact Us"
+    }
+  },
+  "common": {
+    "loading": "Loading",
+    "error": "An error occurred",
+    "retry": "Retry",
+    "viewDetails": "View Details",
+    "language": "Language",
+    "settings": "Settings"
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome Back",
+      "subtitle": "Log in to your account to continue",
+      "username": "Username",
+      "password": "Password",
+      "button": "Login",
+      "forgotPassword": "Forgot Password?",
+      "noAccount": "Don't have an account?",
+      "register": "Register"
+    },
+    "register": {
+      "title": "Create an Account",
+      "subtitle": "Join our digital fashion community",
+      "username": "Username",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "button": "Register",
+      "hasAccount": "Already have an account?",
+      "login": "Login"
+    },
+    "logout": "Logout"
+  }
+}

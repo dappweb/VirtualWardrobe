@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { useAuth } from "@/hooks/use-auth";
+import { useTranslation } from "react-i18next";
 import { Bell, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,10 +17,12 @@ import {
   SheetTrigger,
   SheetClose,
 } from "@/components/ui/sheet";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function Navbar() {
   const [location] = useLocation();
   const { user, logoutMutation } = useAuth();
+  const { t } = useTranslation();
 
   const isActive = (path: string) => location === path;
 
@@ -56,7 +59,7 @@ export default function Navbar() {
                       : "border-transparent text-neutral-500 hover:border-neutral-300 hover:text-neutral-700"
                   } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
                 >
-                  Explore
+                  {t('nav.home')}
                 </a>
               </Link>
               <Link href="/brands">
@@ -67,7 +70,7 @@ export default function Navbar() {
                       : "border-transparent text-neutral-500 hover:border-neutral-300 hover:text-neutral-700"
                   } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
                 >
-                  Brands
+                  {t('nav.brands')}
                 </a>
               </Link>
               <Link href="/assets">
@@ -78,19 +81,20 @@ export default function Navbar() {
                       : "border-transparent text-neutral-500 hover:border-neutral-300 hover:text-neutral-700"
                   } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
                 >
-                  Collections
+                  {t('nav.assets')}
                 </a>
               </Link>
               <a
                 href="#how-it-works"
                 className="border-transparent text-neutral-500 hover:border-neutral-300 hover:text-neutral-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
               >
-                About
+                {t('nav.about')}
               </a>
             </div>
           </div>
           
           <div className="hidden sm:ml-6 sm:flex sm:items-center sm:space-x-4">
+            <LanguageSwitcher />
             <button 
               type="button" 
               className="bg-white p-1 rounded-full text-neutral-400 hover:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500"
@@ -102,7 +106,7 @@ export default function Navbar() {
             {user ? (
               <>
                 <Link href="/profile">
-                  <Button variant="secondary">My Collection</Button>
+                  <Button variant="secondary">{t('profile.title')}</Button>
                 </Link>
                 <DropdownMenu>
                   <DropdownMenuTrigger className="bg-white p-1 rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500">
@@ -113,14 +117,14 @@ export default function Navbar() {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
                     <DropdownMenuItem asChild>
-                      <Link href="/profile">Profile</Link>
+                      <Link href="/profile">{t('nav.profile')}</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
-                      <Link href="/profile/settings">Settings</Link>
+                      <Link href="/profile/settings">{t('common.settings')}</Link>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem onClick={handleLogout}>
-                      Logout
+                      {t('auth.logout')}
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
@@ -128,10 +132,10 @@ export default function Navbar() {
             ) : (
               <>
                 <Link href="/auth">
-                  <Button variant="secondary">Connect Wallet</Button>
+                  <Button variant="secondary">{t('profile.wallet.connectWallet')}</Button>
                 </Link>
                 <Link href="/auth">
-                  <Button variant="outline">Sign In</Button>
+                  <Button variant="outline">{t('nav.login')}</Button>
                 </Link>
               </>
             )}
@@ -167,7 +171,7 @@ export default function Navbar() {
                           variant={isActive("/") ? "default" : "ghost"} 
                           className="w-full justify-start"
                         >
-                          Explore
+                          {t('nav.home')}
                         </Button>
                       </Link>
                     </SheetClose>
@@ -177,7 +181,7 @@ export default function Navbar() {
                           variant={isActive("/brands") ? "default" : "ghost"} 
                           className="w-full justify-start"
                         >
-                          Brands
+                          {t('nav.brands')}
                         </Button>
                       </Link>
                     </SheetClose>
@@ -187,12 +191,12 @@ export default function Navbar() {
                           variant={isActive("/assets") ? "default" : "ghost"} 
                           className="w-full justify-start"
                         >
-                          Collections
+                          {t('nav.assets')}
                         </Button>
                       </Link>
                     </SheetClose>
                     <Button variant="ghost" className="w-full justify-start">
-                      About
+                      {t('nav.about')}
                     </Button>
                   </div>
                   
@@ -202,7 +206,7 @@ export default function Navbar() {
                         <SheetClose asChild>
                           <Link href="/profile">
                             <Button variant="outline" className="w-full">
-                              My Collection
+                              {t('profile.title')}
                             </Button>
                           </Link>
                         </SheetClose>
@@ -211,7 +215,7 @@ export default function Navbar() {
                           className="w-full"
                           onClick={handleLogout}
                         >
-                          Logout
+                          {t('auth.logout')}
                         </Button>
                       </>
                     ) : (
@@ -219,14 +223,14 @@ export default function Navbar() {
                         <SheetClose asChild>
                           <Link href="/auth">
                             <Button variant="default" className="w-full">
-                              Connect Wallet
+                              {t('profile.wallet.connectWallet')}
                             </Button>
                           </Link>
                         </SheetClose>
                         <SheetClose asChild>
                           <Link href="/auth">
                             <Button variant="outline" className="w-full">
-                              Sign In
+                              {t('nav.login')}
                             </Button>
                           </Link>
                         </SheetClose>

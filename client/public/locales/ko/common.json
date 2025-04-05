@@ -1,0 +1,146 @@
+{
+  "appName": "FABRICVERSE",
+  "nav": {
+    "home": "홈",
+    "brands": "브랜드",
+    "assets": "자산",
+    "profile": "프로필",
+    "login": "로그인",
+    "register": "등록",
+    "about": "소개"
+  },
+  "home": {
+    "hero": {
+      "title": "디지털 패션의 미래",
+      "subtitle": "메타버스에서 실제 세계의 패션 자산을 탐색, 수집 및 거래",
+      "cta": "자산 탐색"
+    },
+    "featuredBrands": {
+      "title": "주요 브랜드",
+      "viewAll": "모두 보기"
+    },
+    "assetCollection": {
+      "title": "최신 디지털 자산",
+      "viewAll": "모두 보기"
+    },
+    "howItWorks": {
+      "title": "이용 방법",
+      "step1": {
+        "title": "지갑 연결",
+        "description": "암호화폐 지갑을 연결하여 디지털 패션 자산 탐색 및 거래 시작"
+      },
+      "step2": {
+        "title": "디지털 자산 수집",
+        "description": "다양한 디자이너와 브랜드의 독특한 디지털 패션 자산 둘러보기"
+      },
+      "step3": {
+        "title": "안전한 거래",
+        "description": "블록체인 기술을 사용하여 안전하고 투명하게 패션 자산 거래"
+      }
+    },
+    "registerCTA": {
+      "title": "커뮤니티에 가입하세요",
+      "subtitle": "최신 디지털 패션 업데이트와 독점 혜택을 받으려면 등록하세요",
+      "emailPlaceholder": "이메일 입력",
+      "button": "등록"
+    }
+  },
+  "brands": {
+    "title": "패션 브랜드",
+    "subtitle": "최고의 패션 브랜드와 그들의 독특한 디지털 자산을 탐색하세요",
+    "search": "브랜드 검색"
+  },
+  "assets": {
+    "title": "디지털 패션 자산",
+    "subtitle": "독특한 디지털 패션 자산을 발견하고 수집하세요",
+    "search": "자산 검색",
+    "filter": "필터",
+    "sortBy": "정렬 기준",
+    "sortOptions": {
+      "newest": "최신순",
+      "priceAsc": "가격: 낮은순",
+      "priceDesc": "가격: 높은순",
+      "popular": "인기순"
+    },
+    "noAssets": "조건에 맞는 자산을 찾을 수 없습니다"
+  },
+  "asset": {
+    "brand": "브랜드",
+    "price": "가격",
+    "limited": "한정판",
+    "edition": "에디션",
+    "createdAt": "생성일",
+    "buyNow": "지금 구매",
+    "connect": "지갑 연결",
+    "viewOnBlockchain": "블록체인에서 보기",
+    "details": "상세 정보",
+    "properties": "속성",
+    "history": "히스토리"
+  },
+  "profile": {
+    "title": "내 컬렉션",
+    "subtitle": "디지털 패션 자산 및 계정 설정 관리",
+    "tabs": {
+      "assets": "내 자산",
+      "history": "거래 내역"
+    },
+    "wallet": {
+      "title": "지갑 연결",
+      "subtitle": "구매를 활성화하려면 암호화폐 지갑을 연결하세요",
+      "connected": "지갑 연결됨",
+      "notConnected": "지갑 연결 안됨",
+      "connectWallet": "지갑 연결"
+    },
+    "noAssets": {
+      "title": "자산이 없습니다",
+      "description": "이용 가능한 자산을 탐색하여 컬렉션 구축을 시작하세요",
+      "cta": "자산 둘러보기"
+    },
+    "transactionHistory": {
+      "title": "거래 내역",
+      "description": "구매 내역 및 거래 추적",
+      "comingSoon": "다음 플랫폼 업데이트에서 곧 제공 예정"
+    }
+  },
+
+  "footer": {
+    "copyright": "© 2025 FABRICVERSE. 모든 권리 보유.",
+    "links": {
+      "terms": "이용약관",
+      "privacy": "개인정보 처리방침",
+      "contact": "문의하기"
+    }
+  },
+  "common": {
+    "loading": "로딩 중",
+    "error": "오류가 발생했습니다",
+    "retry": "다시 시도",
+    "viewDetails": "상세 보기",
+    "language": "언어",
+    "settings": "설정"
+  },
+  "auth": {
+    "login": {
+      "title": "환영합니다",
+      "subtitle": "계속하려면 계정에 로그인하세요",
+      "username": "사용자 이름",
+      "password": "비밀번호",
+      "button": "로그인",
+      "forgotPassword": "비밀번호를 잊으셨나요?",
+      "noAccount": "계정이 없으신가요?",
+      "register": "등록"
+    },
+    "register": {
+      "title": "계정 만들기",
+      "subtitle": "디지털 패션 커뮤니티에 가입하세요",
+      "username": "사용자 이름",
+      "email": "이메일",
+      "password": "비밀번호",
+      "confirmPassword": "비밀번호 확인",
+      "button": "등록",
+      "hasAccount": "이미 계정이 있으신가요?",
+      "login": "로그인"
+    },
+    "logout": "로그아웃"
+  }
+}

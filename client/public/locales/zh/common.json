@@ -1,0 +1,146 @@
+{
+  "appName": "FABRICVERSE",
+  "nav": {
+    "home": "首页",
+    "brands": "品牌",
+    "assets": "资产",
+    "profile": "个人中心",
+    "login": "登录",
+    "register": "注册",
+    "about": "关于"
+  },
+  "home": {
+    "hero": {
+      "title": "数字时尚的未来",
+      "subtitle": "在元宇宙中探索、收集和交易真实世界的时尚资产",
+      "cta": "探索资产"
+    },
+    "featuredBrands": {
+      "title": "精选品牌",
+      "viewAll": "查看全部"
+    },
+    "assetCollection": {
+      "title": "最新数字资产",
+      "viewAll": "查看全部"
+    },
+    "howItWorks": {
+      "title": "如何运作",
+      "step1": {
+        "title": "连接钱包",
+        "description": "通过连接您的加密钱包，开始探索和交易数字时尚资产"
+      },
+      "step2": {
+        "title": "收集数字资产",
+        "description": "浏览各种设计师和品牌提供的独特数字时尚资产"
+      },
+      "step3": {
+        "title": "安全交易",
+        "description": "利用区块链技术进行安全、透明的时尚资产交易"
+      }
+    },
+    "registerCTA": {
+      "title": "加入我们的社区",
+      "subtitle": "注册接收最新的数字时尚更新和独家优惠",
+      "emailPlaceholder": "输入您的电子邮件",
+      "button": "注册"
+    }
+  },
+  "brands": {
+    "title": "时尚品牌",
+    "subtitle": "探索顶级时尚品牌及其独特的数字资产",
+    "search": "搜索品牌"
+  },
+  "assets": {
+    "title": "数字时尚资产",
+    "subtitle": "发现和收集独特的数字时尚资产",
+    "search": "搜索资产",
+    "filter": "筛选",
+    "sortBy": "排序方式",
+    "sortOptions": {
+      "newest": "最新",
+      "priceAsc": "价格: 低到高",
+      "priceDesc": "价格: 高到低",
+      "popular": "最受欢迎"
+    },
+    "noAssets": "没有找到符合条件的资产"
+  },
+  "asset": {
+    "brand": "品牌",
+    "price": "价格",
+    "limited": "限量版",
+    "edition": "版本",
+    "createdAt": "创建于",
+    "buyNow": "立即购买",
+    "connect": "连接钱包",
+    "viewOnBlockchain": "在区块链上查看",
+    "details": "详细信息",
+    "properties": "属性",
+    "history": "历史"
+  },
+  "profile": {
+    "title": "我的收藏",
+    "subtitle": "管理您的数字时尚资产和账户设置",
+    "tabs": {
+      "assets": "我的资产",
+      "history": "交易历史"
+    },
+    "wallet": {
+      "title": "钱包连接",
+      "subtitle": "连接您的加密钱包以启用购买功能",
+      "connected": "钱包已连接",
+      "notConnected": "未连接钱包",
+      "connectWallet": "连接钱包"
+    },
+    "noAssets": {
+      "title": "暂无资产",
+      "description": "通过探索可用资产开始构建您的收藏",
+      "cta": "浏览资产"
+    },
+    "transactionHistory": {
+      "title": "交易历史",
+      "description": "跟踪您的购买历史和交易",
+      "comingSoon": "即将在下次平台更新中推出"
+    }
+  },
+
+  "footer": {
+    "copyright": "© 2025 FABRICVERSE. 保留所有权利。",
+    "links": {
+      "terms": "条款与条件",
+      "privacy": "隐私政策",
+      "contact": "联系我们"
+    }
+  },
+  "common": {
+    "loading": "加载中",
+    "error": "发生错误",
+    "retry": "重试",
+    "viewDetails": "查看详情",
+    "language": "语言",
+    "settings": "设置"
+  },
+  "auth": {
+    "login": {
+      "title": "欢迎回来",
+      "subtitle": "登录您的账户以继续",
+      "username": "用户名",
+      "password": "密码",
+      "button": "登录",
+      "forgotPassword": "忘记密码？",
+      "noAccount": "还没有账户？",
+      "register": "注册"
+    },
+    "register": {
+      "title": "创建账户",
+      "subtitle": "加入我们的数字时尚社区",
+      "username": "用户名",
+      "email": "电子邮件",
+      "password": "密码",
+      "confirmPassword": "确认密码",
+      "button": "注册",
+      "hasAccount": "已有账户？",
+      "login": "登录"
+    },
+    "logout": "退出登录"
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "appName": "FABRICVERSE",
+  "nav": {
+    "home": "ホーム",
+    "brands": "ブランド",
+    "assets": "アセット",
+    "profile": "プロフィール",
+    "login": "ログイン",
+    "register": "登録",
+    "about": "概要"
+  },
+  "home": {
+    "hero": {
+      "title": "デジタルファッションの未来",
+      "subtitle": "メタバースで実世界のファッションアセットを探索、収集、取引",
+      "cta": "アセットを探索"
+    },
+    "featuredBrands": {
+      "title": "注目ブランド",
+      "viewAll": "すべて表示"
+    },
+    "assetCollection": {
+      "title": "最新デジタルアセット",
+      "viewAll": "すべて表示"
+    },
+    "howItWorks": {
+      "title": "利用方法",
+      "step1": {
+        "title": "ウォレット接続",
+        "description": "暗号ウォレットを接続して、デジタルファッションアセットの探索と取引を開始"
+      },
+      "step2": {
+        "title": "デジタルアセット収集",
+        "description": "様々なデザイナーやブランドからユニークなデジタルファッションアセットを閲覧"
+      },
+      "step3": {
+        "title": "安全な取引",
+        "description": "ブロックチェーン技術を使用して、安全かつ透明にファッションアセットを取引"
+      }
+    },
+    "registerCTA": {
+      "title": "コミュニティに参加",
+      "subtitle": "最新のデジタルファッション情報と限定オファーを受け取るには登録してください",
+      "emailPlaceholder": "メールアドレスを入力",
+      "button": "登録"
+    }
+  },
+  "brands": {
+    "title": "ファッションブランド",
+    "subtitle": "トップファッションブランドとそのユニークなデジタルアセットを探索",
+    "search": "ブランドを検索"
+  },
+  "assets": {
+    "title": "デジタルファッションアセット",
+    "subtitle": "ユニークなデジタルファッションアセットを発見し収集",
+    "search": "アセットを検索",
+    "filter": "フィルター",
+    "sortBy": "並び替え",
+    "sortOptions": {
+      "newest": "最新",
+      "priceAsc": "価格: 安い順",
+      "priceDesc": "価格: 高い順",
+      "popular": "人気順"
+    },
+    "noAssets": "条件に一致するアセットが見つかりません"
+  },
+  "asset": {
+    "brand": "ブランド",
+    "price": "価格",
+    "limited": "限定版",
+    "edition": "エディション",
+    "createdAt": "作成日",
+    "buyNow": "今すぐ購入",
+    "connect": "ウォレットを接続",
+    "viewOnBlockchain": "ブロックチェーンで表示",
+    "details": "詳細",
+    "properties": "属性",
+    "history": "履歴"
+  },
+  "profile": {
+    "title": "マイコレクション",
+    "subtitle": "デジタルファッションアセットとアカウント設定を管理",
+    "tabs": {
+      "assets": "マイアセット",
+      "history": "取引履歴"
+    },
+    "wallet": {
+      "title": "ウォレット接続",
+      "subtitle": "購入を有効にするには暗号ウォレットを接続してください",
+      "connected": "ウォレット接続済み",
+      "notConnected": "ウォレット未接続",
+      "connectWallet": "ウォレットを接続"
+    },
+    "noAssets": {
+      "title": "アセットがありません",
+      "description": "利用可能なアセットを探索して、コレクションの構築を始めましょう",
+      "cta": "アセットを閲覧"
+    },
+    "transactionHistory": {
+      "title": "取引履歴",
+      "description": "購入履歴と取引を追跡",
+      "comingSoon": "次回のプラットフォームアップデートで提供予定"
+    }
+  },
+
+  "footer": {
+    "copyright": "© 2025 FABRICVERSE. 全著作権所有。",
+    "links": {
+      "terms": "利用規約",
+      "privacy": "プライバシーポリシー",
+      "contact": "お問い合わせ"
+    }
+  },
+  "common": {
+    "loading": "読み込み中",
+    "error": "エラーが発生しました",
+    "retry": "再試行",
+    "viewDetails": "詳細を表示",
+    "language": "言語",
+    "settings": "設定"
+  },
+  "auth": {
+    "login": {
+      "title": "おかえりなさい",
+      "subtitle": "続行するにはアカウントにログインしてください",
+      "username": "ユーザー名",
+      "password": "パスワード",
+      "button": "ログイン",
+      "forgotPassword": "パスワードを忘れましたか？",
+      "noAccount": "アカウントをお持ちでないですか？",
+      "register": "登録"
+    },
+    "register": {
+      "title": "アカウント作成",
+      "subtitle": "デジタルファッションコミュニティに参加",
+      "username": "ユーザー名",
+      "email": "メールアドレス",
+      "password": "パスワード",
+      "confirmPassword": "パスワード確認",
+      "button": "登録",
+      "hasAccount": "すでにアカウントをお持ちですか？",
+      "login": "ログイン"
+    },
+    "logout": "ログアウト"
+  }
+}

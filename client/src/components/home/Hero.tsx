@@ -94,19 +94,19 @@ export default function Hero() {
                 <div className="absolute inset-0 bg-gradient-to-t from-primary-900/30 to-transparent mix-blend-multiply"></div>
               </div>
               
-              <div className="absolute left-4 right-4 bottom-4 rounded-lg bg-white/90 backdrop-blur-sm p-4 shadow-lg">
+              <div className="absolute left-4 right-4 bottom-4 rounded-lg bg-primary-800/80 backdrop-blur-sm p-4 shadow-lg">
                 <div className="flex items-center space-x-4">
                   <div className="flex-shrink-0">
-                    <div className="h-10 w-10 rounded-full bg-gradient-to-r from-primary-500 to-accent-500 flex items-center justify-center text-white font-bold">
-                      FV
+                    <div className="h-10 w-10 rounded-full bg-gradient-to-r from-accent-500 to-secondary-500 flex items-center justify-center text-white font-bold">
+                      CSQ
                     </div>
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-neutral-900">{t('home.hero.featuredAsset', '精选资产')}</p>
-                    <p className="text-xs text-neutral-500">{t('home.hero.assetDesc', '限量版数字化服装，区块链验证')}</p>
+                    <p className="text-sm font-medium text-white">{t('home.hero.featuredAsset', '精选资产')}</p>
+                    <p className="text-xs text-neutral-200">{t('home.hero.assetDesc', '限量版数字化服装，区块链验证')}</p>
                   </div>
                   <div className="ml-auto">
-                    <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                    <span className="inline-flex items-center rounded-md bg-green-700 px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-green-500/30">
                       + 128% {t('home.hero.value', '价值增长')}
                     </span>
                   </div>

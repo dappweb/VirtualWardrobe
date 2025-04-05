@@ -86,6 +86,44 @@ export class MemStorage implements IStorage {
   }
 
   private seedData() {
+    // 创建演示账号
+    
+    // 1. 普通用户 - 买家角色
+    const buyer = this.createUser({
+      username: "buyer",
+      email: "buyer@fabricverse.com",
+      password: "$2b$10$3QIZiRxmGQ4k9qFG1U7QWOYtMgz37iRx6tpWqHWnZ4MbDjQnXpTHy", // 密码: buyerpass
+      role: "buyer",
+      verificationStatus: "verified",
+      walletAddress: "0x12345...abcde",
+      avatar: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce",
+      displayName: "Fashion Buyer"
+    });
+    
+    // 2. 租户用户 - 已认证的时尚品牌
+    const tenant = this.createUser({
+      username: "tenant",
+      email: "tenant@fabricverse.com",
+      password: "$2b$10$3QIZiRxmGQ4k9qFG1U7QWOYtMgz37iRx6tpWqHWnZ4MbDjQnXpTHy", // 密码: tenantpass
+      role: "tenant",
+      verificationStatus: "verified",
+      walletAddress: "0x67890...fghij",
+      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2",
+      displayName: "Brand Manager"
+    });
+    
+    // 3. 管理员 - 平台管理员
+    const admin = this.createUser({
+      username: "admin",
+      email: "admin@fabricverse.com",
+      password: "$2b$10$3QIZiRxmGQ4k9qFG1U7QWOYtMgz37iRx6tpWqHWnZ4MbDjQnXpTHy", // 密码: adminpass
+      role: "admin",
+      verificationStatus: "verified",
+      walletAddress: "0x24680...klmno",
+      avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7",
+      displayName: "Platform Admin"
+    });
+    
     // Seed brands
     const csqBrand = this.createBrand({
       name: "创思奇 (CSQ)",
@@ -95,7 +133,8 @@ export class MemStorage implements IStorage {
       coverImageUrl: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b",
       activeAssets: 12,
       floorPrice: 2000,
-      volume: 24500
+      volume: 24500,
+      tenantId: tenant.id // 将第一个品牌关联到租户账号
     });
     
     const modaBrand = this.createBrand({

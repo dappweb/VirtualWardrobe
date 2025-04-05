@@ -17,6 +17,8 @@ export const users = pgTable("users", {
   brandId: integer("brand_id"), // 关联的品牌ID（如果是租户用户）
   verifiedAt: timestamp("verified_at"), // 租户验证时间
   verificationStatus: text("verification_status").default('pending'), // 验证状态：pending, verified, rejected
+  // 虚拟钱包相关字段
+  tokenBalance: integer("token_balance").default(10000), // 默认给予10,000平台代币
   // 额外信息字段（如企业信息）
   contactInfo: text("contact_info"),
   metadata: json("metadata").$type<{

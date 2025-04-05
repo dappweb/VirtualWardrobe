@@ -314,7 +314,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   
   // ===== 管理员API =====
   
-  // 获取所有用户
+  // 获取所有用户 (需要管理员权限)
   app.get("/api/admin/users", async (req, res) => {
     if (!req.isAuthenticated()) {
       return res.status(401).json({ error: "Unauthorized" });
@@ -342,6 +342,41 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(users);
     } catch (error) {
       res.status(500).json({ error: "获取用户列表失败" });
+    }
+  });
+  
+  // 公开的演示账号列表 API，用于展示不同角色的账号
+  app.get("/api/demo-accounts", async (req, res) => {
+    try {
+      // 获取所有角色的演示账号
+      const buyers = await storage.getUsersByRole('buyer');
+      const tenants = await storage.getUsersByRole('tenant');
+      const admins = await storage.getUsersByRole('admin');
+      
+      // 过滤敏感信息，只保留必要字段
+      const processDemoAccount = (user: any) => ({
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        role: user.role,
+        displayName: user.displayName || user.username,
+        avatar: user.avatar,
+        verificationStatus: user.verificationStatus,
+        walletAddress: user.walletAddress ? `${user.walletAddress.substring(0, 8)}...` : null,
+        loginUrl: "/auth"
+      });
+      
+      const demoAccounts = {
+        buyer: buyers.length > 0 ? processDemoAccount(buyers[0]) : null,
+        tenant: tenants.length > 0 ? processDemoAccount(tenants[0]) : null,
+        admin: admins.length > 0 ? processDemoAccount(admins[0]) : null,
+        note: "使用以下账号访问系统，所有账号共享密码: buyerpass/tenantpass/adminpass",
+        loginUrl: "/auth"
+      };
+      
+      res.json(demoAccounts);
+    } catch (error) {
+      res.status(500).json({ error: "获取演示账号信息失败" });
     }
   });
   

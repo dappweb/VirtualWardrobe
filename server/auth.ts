@@ -45,11 +45,29 @@ export function setupAuth(app: Express) {
     new LocalStrategy(
       { usernameField: "email" },
       async (email, password, done) => {
-        const user = await storage.getUserByEmail(email);
-        if (!user || !(await comparePasswords(password, user.password))) {
-          return done(null, false);
-        } else {
+        try {
+          const user = await storage.getUserByEmail(email);
+          if (!user) {
+            return done(null, false, { message: "Incorrect email or password" });
+          }
+
+          // 演示账号处理：检查用户名是否是演示账号（buyer, tenant, admin）
+          if (["buyer", "tenant", "admin"].includes(user.username)) {
+            // 所有演示账号使用相同的密码模式 (buyerpass, tenantpass, adminpass)
+            const demoPass = `${user.username}pass`;
+            if (password === demoPass) {
+              return done(null, user);
+            }
+          }
+          
+          // 如果不是演示账号或演示密码不匹配，使用标准的密码比较
+          if (!(await comparePasswords(password, user.password))) {
+            return done(null, false, { message: "Incorrect email or password" });
+          }
+          
           return done(null, user);
+        } catch (error) {
+          return done(error);
         }
       },
     ),

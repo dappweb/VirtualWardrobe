@@ -104,7 +104,7 @@ export default function AuthPage() {
             {/* Left side - Auth forms */}
             <div className="lg:w-1/2 p-8 lg:p-12">
               <h2 className="text-3xl font-display font-bold text-neutral-900">
-                Welcome to FABRICVERSE
+                Welcome to 创思奇 (Chuangsiqi)
               </h2>
               <p className="mt-3 text-neutral-500">
                 Connect to the future of fashion and digital asset ownership
@@ -311,7 +311,7 @@ export default function AuthPage() {
             <div className="hidden lg:block lg:w-1/2 bg-gradient-to-r from-primary-700 to-secondary-700 p-12 text-white flex flex-col justify-center">
               <div>
                 <h1 className="text-4xl font-display font-bold">
-                  FABRIC<span className="text-accent-300">VERSE</span>
+                  创思<span className="text-accent-300">奇</span>
                 </h1>
                 <h2 className="mt-6 text-3xl font-display font-bold">
                   The Future of Fashion Assets

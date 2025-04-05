@@ -287,7 +287,7 @@ function TenantPage() {
       <CardHeader>
         <CardTitle>租户注册</CardTitle>
         <CardDescription>
-          填写以下信息申请成为FABRICVERSE平台的租户
+          填写以下信息申请成为创思奇平台的租户
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -972,7 +972,7 @@ function TenantPage() {
             <Building className="h-4 w-4" />
             <AlertTitle>成为租户</AlertTitle>
             <AlertDescription>
-              申请成为FABRICVERSE的租户，创建您自己的品牌，发行数字时尚资产。
+              申请成为创思奇的租户，创建您自己的品牌，发行数字时尚资产。
             </AlertDescription>
           </Alert>
           

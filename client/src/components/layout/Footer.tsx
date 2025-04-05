@@ -110,7 +110,7 @@ export default function Footer() {
         
         <div className="mt-12 border-t border-neutral-700 pt-8">
           <p className="text-base text-neutral-400 text-center">
-            &copy; {new Date().getFullYear()} FABRICVERSE. All rights reserved.
+            &copy; {new Date().getFullYear()} 创思奇 (Chuangsiqi). All rights reserved.
           </p>
         </div>
       </div>

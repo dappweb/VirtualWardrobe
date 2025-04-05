@@ -6,7 +6,7 @@ import { ethers } from 'ethers';
 export type WalletType = 'ethereum' | 'tron';
 
 // 定义认证消息
-const AUTH_MESSAGE = 'Sign this message to authenticate with FABRICVERSE platform';
+const AUTH_MESSAGE = 'Sign this message to authenticate with 创思奇 (Chuangsiqi) platform';
 
 // Web3服务接口
 export interface IWeb3Service {

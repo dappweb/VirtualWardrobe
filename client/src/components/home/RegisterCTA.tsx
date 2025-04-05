@@ -101,7 +101,7 @@ export default function RegisterCTA() {
             </div>
             
             <h2 className="text-4xl lg:text-5xl font-bold text-white font-display mb-6">
-              {t('home.registerCTA.title', '加入FABRICVERSE')}
+              {t('home.registerCTA.title', '加入创思奇')}
             </h2>
             
             <p className="text-xl text-white/80 mb-8 max-w-lg lg:mx-0 mx-auto">

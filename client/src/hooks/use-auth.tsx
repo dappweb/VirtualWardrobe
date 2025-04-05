@@ -72,7 +72,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       queryClient.setQueryData(["/api/user"], user);
       toast({
         title: "Registration successful",
-        description: `Welcome to FABRICVERSE, ${user.username}!`,
+        description: `Welcome to 创思奇, ${user.username}!`,
       });
     },
     onError: (error: Error) => {

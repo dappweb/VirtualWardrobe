@@ -50,23 +50,46 @@ export default function FinancialInsights() {
     {
       id: 1,
       title: t('home.financial.insight1Title', '限量版设计资产价值增长'),
-      content: t('home.financial.insight1Content', '限量版设计师资产在过去90天内平均增值超过25%，远高于传统投资渠道。'),
+      content: t('home.financial.insight1Content', '限量版设计师资产在过去90天内平均增值超过25%，远高于传统投资渠道。投资回报率比传统时尚零售高出4.3倍。'),
       icon: <TrendingUp className="h-5 w-5" />,
-      color: 'bg-green-50 text-green-700'
+      color: 'bg-green-50 text-green-700',
+      stats: {
+        value: '28.6%',
+        label: t('home.financial.avgReturn', '平均回报率')
+      }
     },
     {
       id: 2,
       title: t('home.financial.insight2Title', '可持续时尚资产受追捧'),
-      content: t('home.financial.insight2Content', '使用可持续材料创作的时尚资产在二级市场上的交易量增长了40%。'),
+      content: t('home.financial.insight2Content', '使用可持续材料创作的时尚资产在二级市场上的交易量增长了40%。这类资产的持有者数量在3个月内增加了12,400名。'),
       icon: <BarChart3 className="h-5 w-5" />,
-      color: 'bg-blue-50 text-blue-700'
+      color: 'bg-blue-50 text-blue-700',
+      stats: {
+        value: '43.2%',
+        label: t('home.financial.tradingVolumeIncrease', '交易量增长')
+      }
     },
     {
       id: 3,
       title: t('home.financial.insight3Title', '数字收藏品流动性提高'),
-      content: t('home.financial.insight3Content', '区块链技术的应用使得时尚数字收藏品的市场流动性提高了63%。'),
+      content: t('home.financial.insight3Content', '区块链技术的应用使得时尚数字收藏品的市场流动性提高了63%。资产的平均交易时间从12天缩短至4.5天。'),
       icon: <DollarSign className="h-5 w-5" />,
-      color: 'bg-purple-50 text-purple-700'
+      color: 'bg-purple-50 text-purple-700',
+      stats: {
+        value: '68.5%',
+        label: t('home.financial.liquidityIncrease', '流动性提升')
+      }
+    },
+    {
+      id: 4,
+      title: t('home.financial.insight4Title', '数字资产认证价值溢价'),
+      content: t('home.financial.insight4Content', '经过区块链认证的数字时尚资产比未认证资产平均高出52%的市场价值，展示了验证机制对资产估值的重要性。'),
+      icon: <Award className="h-5 w-5" />,
+      color: 'bg-amber-50 text-amber-700',
+      stats: {
+        value: '52.3%',
+        label: t('home.financial.valuePremium', '价值溢价')
+      }
     }
   ];
   
@@ -191,18 +214,31 @@ export default function FinancialInsights() {
             {/* 市场洞察部分 */}
             <div className="space-y-6 mb-10">
               {insights.map((insight) => (
-                <div key={insight.id} className={`rounded-xl p-5 ${insight.color} bg-opacity-10`}>
+                <div key={insight.id} className={`rounded-xl p-5 ${insight.color} bg-opacity-10 transition-all hover:shadow-md`}>
                   <div className="flex items-start">
                     <div className={`${insight.color} bg-opacity-20 rounded-full p-2 mr-4`}>
                       {insight.icon}
                     </div>
-                    <div>
-                      <h3 className="font-semibold text-neutral-900 mb-1">
-                        {insight.title}
-                      </h3>
-                      <p className="text-neutral-600 text-sm">
+                    <div className="flex-1">
+                      <div className="flex justify-between items-start">
+                        <h3 className="font-semibold text-neutral-900 mb-1">
+                          {insight.title}
+                        </h3>
+                        <div className={`${insight.color} px-2 py-1 rounded-md text-sm font-medium`}>
+                          {insight.stats.value}
+                        </div>
+                      </div>
+                      <p className="text-neutral-600 text-sm mb-2">
                         {insight.content}
                       </p>
+                      <div className="flex justify-between items-center mt-2 pt-2 border-t border-neutral-100">
+                        <span className="text-xs text-neutral-500">
+                          {insight.stats.label}
+                        </span>
+                        <div className="bg-white px-2 py-0.5 rounded text-xs font-medium text-neutral-700 shadow-sm">
+                          {t('home.financial.verified', '区块链验证')}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -164,6 +164,50 @@ export class MemStorage implements IStorage {
       volume: 10500
     });
     
+    const retrBrand = this.createBrand({
+      name: "复古时光 (RetroTime)",
+      description: "专注于重新诠释经典时尚元素，将复古风格与现代工艺相结合。复古时光从中国传统服饰和20世纪各个时代的时尚中汲取灵感，创造出富有历史韵味又不失时代感的精品。",
+      shortDescription: "Reimagining Vintage Chinese Fashion",
+      logoUrl: "https://via.placeholder.com/100",
+      coverImageUrl: "https://images.unsplash.com/photo-1573227895320-87e12e19a92b",
+      activeAssets: 9,
+      floorPrice: 1500,
+      volume: 12800
+    });
+    
+    const urbanTrendsBrand = this.createBrand({
+      name: "Urban Trends",
+      description: "Capturing the essence of global street culture and urban lifestyle through bold designs and distinctive graphics. Urban Trends creates streetwear that speaks to the energy and diversity of city life, with influences from graffiti, urban music, and contemporary art.",
+      shortDescription: "Global Street Culture Fashion",
+      logoUrl: "https://via.placeholder.com/100",
+      coverImageUrl: "https://images.unsplash.com/photo-1523398002808-094080895957",
+      activeAssets: 15,
+      floorPrice: 900,
+      volume: 28000
+    });
+    
+    const ecoChicBrand = this.createBrand({
+      name: "EcoChic",
+      description: "Leading the way in eco-conscious fashion with innovative sustainable materials and ethical production. EcoChic proves that fashion can be both environmentally responsible and stylish, creating versatile pieces from recycled, upcycled, and responsibly sourced materials.",
+      shortDescription: "Sustainable Fashion Revolution",
+      logoUrl: "https://via.placeholder.com/100",
+      coverImageUrl: "https://images.unsplash.com/photo-1606041008023-472dfb5e530f",
+      activeAssets: 11,
+      floorPrice: 1200,
+      volume: 16500
+    });
+    
+    const luxEleganceBrand = this.createBrand({
+      name: "奢雅 (LuxElegance)",
+      description: "在中国传统手工艺与现代奢侈品设计之间架起桥梁。奢雅每件作品都凝聚了世代相传的技艺，采用最优质的材料，展现东方美学的精髓与当代奢华的完美融合。",
+      shortDescription: "Contemporary Chinese Luxury",
+      logoUrl: "https://via.placeholder.com/100",
+      coverImageUrl: "https://images.unsplash.com/photo-1588495752527-44ab116db881",
+      activeAssets: 7,
+      floorPrice: 5000,
+      volume: 42000
+    });
+    
     // Seed assets
     this.createAsset({
       name: "Modern Minimalist Jacket",
@@ -218,6 +262,159 @@ export class MemStorage implements IStorage {
       editionNumber: 9,
       totalEditions: 25,
       tokenId: "0x5e2f...8a7c",
+      blockchain: "Ethereum"
+    });
+    
+    // RetroTime assets
+    this.createAsset({
+      name: "复古旗袍上衣",
+      description: "融合了传统旗袍元素与现代剪裁的精致上衣，采用高品质真丝面料，手工绣制传统纹样，完美展现东方女性的优雅气质。每件作品均由经验丰富的工匠精心制作，代表着中国传统服饰文化的传承与创新。",
+      price: 2500,
+      imageUrl: "https://images.unsplash.com/photo-1609096458733-95b38583ac4e",
+      brandId: 4,
+      category: "Apparel",
+      limited: true,
+      editionNumber: 3,
+      totalEditions: 12,
+      tokenId: "0x8d7c...6b2e",
+      blockchain: "Ethereum"
+    });
+    
+    this.createAsset({
+      name: "70's Inspired Denim Jacket",
+      description: "A perfect recreation of the iconic 70's denim jacket with authentic vintage details and wash techniques. This jacket features hand-distressed elements and original metal hardware, capturing the essence of an era that revolutionized fashion.",
+      price: 1950,
+      imageUrl: "https://images.unsplash.com/photo-1576871337622-98d48d1cf531",
+      brandId: 4,
+      category: "Apparel",
+      limited: false,
+      tokenId: "0x9e4a...3c5d",
+      blockchain: "Ethereum"
+    });
+    
+    // Urban Trends assets
+    this.createAsset({
+      name: "Graffiti Bomber Jacket",
+      description: "A canvas of urban expression, each Graffiti Bomber Jacket features unique hand-painted artwork by renowned street artists. The designs capture the raw energy and creative spirit of city streets, making each piece an authentic wearable art object.",
+      price: 1200,
+      imageUrl: "https://images.unsplash.com/photo-1551537482-f2075a1d41f2",
+      brandId: 5,
+      category: "Apparel",
+      limited: true,
+      editionNumber: 5,
+      totalEditions: 30,
+      tokenId: "0x1f3b...8d2c",
+      blockchain: "Ethereum"
+    });
+    
+    this.createAsset({
+      name: "Street Culture Cap",
+      description: "This premium cap represents the perfect fusion of street art and high-quality craftsmanship. Each cap features unique embroidery inspired by global street culture and comes with digital authentication of its limited-edition status.",
+      price: 450,
+      imageUrl: "https://images.unsplash.com/photo-1521369909029-2afed882baee",
+      brandId: 5,
+      category: "Accessories",
+      limited: true,
+      editionNumber: 12,
+      totalEditions: 50,
+      tokenId: "0x2e9d...7a1f",
+      blockchain: "Ethereum"
+    });
+    
+    // EcoChic assets
+    this.createAsset({
+      name: "Recycled Ocean Tote",
+      description: "Created from plastic recovered from the ocean, each Recycled Ocean Tote represents EcoChic's commitment to environmental responsibility. The innovative manufacturing process transforms harmful waste into a durable, stylish, and practical accessory with minimal environmental impact.",
+      price: 980,
+      imageUrl: "https://images.unsplash.com/photo-1605518216938-7c31b7b14ad0",
+      brandId: 6,
+      category: "Accessories",
+      limited: false,
+      tokenId: "0x4b8e...9c2d",
+      blockchain: "Ethereum"
+    });
+    
+    this.createAsset({
+      name: "Sustainable Loungewear Set",
+      description: "Crafted from bamboo and organic cotton, this loungewear set exemplifies comfort meeting responsibility. The fabric is biodegradable, hypoallergenic, and produced using closed-loop manufacturing processes that minimize water and energy usage.",
+      price: 1500,
+      imageUrl: "https://images.unsplash.com/photo-1604267764931-7c448bf9938c",
+      brandId: 6,
+      category: "Apparel",
+      limited: false,
+      tokenId: "0x5c7d...3e1b",
+      blockchain: "Ethereum"
+    });
+    
+    // LuxElegance assets
+    this.createAsset({
+      name: "龙凤呈祥手工刺绣丝巾",
+      description: "这款丝巾融合了传统苏绣工艺与现代设计美学，由中国丝绸之府的顶级绣娘历时3个月精心制作。100%桑蚕丝材质，传统龙凤图案象征着吉祥与和谐，每一针一线都体现了非物质文化遗产的精髓与匠心。",
+      price: 12000,
+      imageUrl: "https://images.unsplash.com/photo-1583170658853-8b4713647e6f",
+      brandId: 7,
+      category: "Accessories",
+      limited: true,
+      editionNumber: 1,
+      totalEditions: 8,
+      tokenId: "0x6d9f...4e3a",
+      blockchain: "Ethereum"
+    });
+    
+    this.createAsset({
+      name: "翡翠玉扣真丝外套",
+      description: "采用最高级真丝面料定制，结合新中式设计理念，点缀以天然A货翡翠玉扣，将东方内敛美学与现代剪裁融为一体。每件作品均由技艺精湛的裁缝大师手工制作，彰显尊贵气质与文化底蕴。",
+      price: 18500,
+      imageUrl: "https://images.unsplash.com/photo-1608159477202-8a37e8832e5a",
+      brandId: 7,
+      category: "Apparel",
+      limited: true,
+      editionNumber: 2,
+      totalEditions: 5,
+      tokenId: "0x7e2a...5f4b",
+      blockchain: "Ethereum"
+    });
+    
+    // More CSQ assets
+    this.createAsset({
+      name: "Tech-Infused Crossbody Bag",
+      description: "A revolutionary accessory that merges fashion with cutting-edge technology. This crossbody bag features integrated wireless charging, NFC authentication, and LED lighting elements that can be customized via smartphone app. The perfect embodiment of 创思奇's vision for the future of fashion.",
+      price: 4200,
+      imageUrl: "https://images.unsplash.com/photo-1584917865442-de89df76afd3",
+      brandId: 1,
+      category: "Accessories",
+      limited: true,
+      editionNumber: 6,
+      totalEditions: 15,
+      tokenId: "0x8f3b...6g2c",
+      blockchain: "Ethereum"
+    });
+    
+    // More MODA Collective assets
+    this.createAsset({
+      name: "Biodegradable Weekender",
+      description: "This innovative travel bag is crafted entirely from plant-based materials and natural dyes, making it 100% biodegradable at the end of its long life cycle. The sleek design and spacious compartments make it as functional as it is environmentally responsible.",
+      price: 2200,
+      imageUrl: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62",
+      brandId: 2,
+      category: "Accessories",
+      limited: false,
+      tokenId: "0x9a4c...7h3d",
+      blockchain: "Ethereum"
+    });
+    
+    // More AVNT Studio assets
+    this.createAsset({
+      name: "Sculptural Dress",
+      description: "Transcending conventional clothing concepts, this architectural wonder functions as both a dress and a sculptural art piece. The innovative design uses advanced thermoreactive fabrics that subtly change structure in response to body temperature and ambient conditions.",
+      price: 8500,
+      imageUrl: "https://images.unsplash.com/photo-1509631179647-0177331693ae",
+      brandId: 3,
+      category: "Apparel",
+      limited: true,
+      editionNumber: 1,
+      totalEditions: 3,
+      tokenId: "0x1b5d...8i4e",
       blockchain: "Ethereum"
     });
   }

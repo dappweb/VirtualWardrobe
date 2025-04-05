@@ -18,6 +18,7 @@ import {
   SheetClose,
 } from "@/components/ui/sheet";
 import LanguageSwitcher from "./LanguageSwitcher";
+import VirtualWallet from "@/components/user/VirtualWallet";
 
 export default function Navbar() {
   const [location] = useLocation();
@@ -105,6 +106,9 @@ export default function Navbar() {
             
             {user ? (
               <>
+                {/* 虚拟钱包组件 - 仅对买家显示 */}
+                {user.role === 'buyer' && <VirtualWallet />}
+                
                 <Link href="/profile">
                   <Button variant="secondary">{t('profile.title')}</Button>
                 </Link>
@@ -203,6 +207,13 @@ export default function Navbar() {
                   <div className="mt-auto space-y-3">
                     {user ? (
                       <>
+                        {/* 虚拟钱包组件 - 仅对买家显示 */}
+                        {user.role === 'buyer' && (
+                          <div className="mb-4">
+                            <VirtualWallet />
+                          </div>
+                        )}
+                      
                         <SheetClose asChild>
                           <Link href="/profile">
                             <Button variant="outline" className="w-full">

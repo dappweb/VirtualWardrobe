@@ -1,8 +1,5 @@
 import { useState } from "react";
-import { useAuth } from "@/hooks/use-auth";
-import { useMutation } from "@tanstack/react-query";
-import { Link, useLocation } from "wouter";
-import { apiRequest, queryClient } from "@/lib/queryClient";
+import { Link } from "wouter";
 import { AssetWithBrand } from "@/types";
 import { 
   Shield, 
@@ -16,16 +13,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import VerifyBadge from "@/components/ui/verify-badge";
-import { useToast } from "@/hooks/use-toast";
+import AssetPurchaseButton from "./AssetPurchaseButton";
 
 interface AssetDetailsProps {
   asset: AssetWithBrand;
 }
 
 export default function AssetDetails({ asset }: AssetDetailsProps) {
-  const [, navigate] = useLocation();
-  const { user } = useAuth();
-  const { toast } = useToast();
   const [selectedImage, setSelectedImage] = useState(asset.imageUrl);
   
   // Mock different views for demo purposes
@@ -35,44 +29,6 @@ export default function AssetDetails({ asset }: AssetDetailsProps) {
     "https://images.unsplash.com/photo-1543163521-1bf539c55dd2",
     "https://images.unsplash.com/photo-1549298916-b41d501d3772"
   ];
-  
-  const purchaseMutation = useMutation({
-    mutationFn: async () => {
-      // Generate a mock transaction hash for demo
-      const mockTransactionHash = `0x${Array.from({ length: 64 }, () => 
-        Math.floor(Math.random() * 16).toString(16)).join('')}`;
-        
-      const res = await apiRequest(
-        "POST", 
-        `/api/assets/${asset.id}/purchase`, 
-        { transactionHash: mockTransactionHash }
-      );
-      return await res.json();
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/user/assets"] });
-      toast({
-        title: "Purchase Successful!",
-        description: `You now own ${asset.name}. View it in your collection.`,
-      });
-    },
-    onError: (error: Error) => {
-      toast({
-        title: "Purchase Failed",
-        description: error.message || "Could not complete purchase",
-        variant: "destructive",
-      });
-    }
-  });
-  
-  const handlePurchase = () => {
-    if (!user) {
-      navigate("/auth");
-      return;
-    }
-    
-    purchaseMutation.mutate();
-  };
   
   return (
     <div className="bg-white rounded-lg overflow-hidden shadow-md">
@@ -183,13 +139,8 @@ export default function AssetDetails({ asset }: AssetDetailsProps) {
               <Button variant="outline" className="py-2 px-4 text-neutral-700">
                 Add to Watchlist
               </Button>
-              <Button 
-                onClick={handlePurchase}
-                disabled={purchaseMutation.isPending}
-                className="py-2 px-6 bg-accent-500 hover:bg-accent-700"
-              >
-                {purchaseMutation.isPending ? "Processing..." : "Purchase Now"}
-              </Button>
+              {/* 使用 AssetPurchaseButton 组件替换原有购买按钮 */}
+              <AssetPurchaseButton asset={asset} />
             </div>
           </div>
         </div>

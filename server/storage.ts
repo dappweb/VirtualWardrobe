@@ -31,6 +31,10 @@ export interface IStorage {
   updateUserRole(userId: number, role: string): Promise<User | undefined>; // 更新用户角色
   verifyTenant(userId: number, verificationStatus: string): Promise<User | undefined>; // 验证租户
   
+  // 虚拟钱包相关
+  getUserTokenBalance(userId: number): Promise<number>; // 获取用户代币余额
+  updateUserTokenBalance(userId: number, amount: number): Promise<User | undefined>; // 更新用户代币余额
+  
   // Brands
   getBrands(): Promise<Brand[]>;
   getBrand(id: number): Promise<Brand | undefined>;
@@ -49,6 +53,7 @@ export interface IStorage {
   getUserAssets(userId: number): Promise<UserAsset[]>;
   getUserAssetDetails(userId: number): Promise<AssetWithBrand[]>;
   createUserAsset(userAsset: InsertUserAsset): Promise<UserAsset>;
+  purchaseAsset(userId: number, assetId: number): Promise<{userAsset: UserAsset, user: User} | undefined>; // 购买资产
   
   sessionStore: session.SessionStore;
 }
@@ -283,6 +288,27 @@ export class MemStorage implements IStorage {
     return updatedUser;
   }
   
+  // 虚拟钱包相关方法
+  async getUserTokenBalance(userId: number): Promise<number> {
+    const user = this.users.get(userId);
+    if (!user) return 0;
+    return user.tokenBalance || 0;
+  }
+  
+  async updateUserTokenBalance(userId: number, amount: number): Promise<User | undefined> {
+    const user = this.users.get(userId);
+    if (!user) return undefined;
+    
+    const currentBalance = user.tokenBalance || 0;
+    const updatedUser = { 
+      ...user, 
+      tokenBalance: currentBalance + amount 
+    };
+    
+    this.users.set(userId, updatedUser);
+    return updatedUser;
+  }
+  
   // Brand methods
   async getBrands(): Promise<Brand[]> {
     return Array.from(this.brands.values());
@@ -418,6 +444,50 @@ export class MemStorage implements IStorage {
     };
     this.userAssets.set(id, userAsset);
     return userAsset;
+  }
+  
+  // 资产购买方法
+  async purchaseAsset(userId: number, assetId: number): Promise<{userAsset: UserAsset, user: User} | undefined> {
+    // 检查用户是否存在
+    const user = this.users.get(userId);
+    if (!user) return undefined;
+    
+    // 检查资产是否存在
+    const asset = this.assets.get(assetId);
+    if (!asset) return undefined;
+    
+    // 检查用户余额是否足够
+    const userBalance = user.tokenBalance || 0;
+    if (userBalance < asset.price) {
+      throw new Error('余额不足，请充值后再试');
+    }
+    
+    // 更新用户余额
+    const newBalance = userBalance - asset.price;
+    const updatedUser = await this.updateUserTokenBalance(userId, -asset.price);
+    if (!updatedUser) {
+      throw new Error('更新用户余额失败');
+    }
+    
+    // 创建用户资产
+    const userAsset = await this.createUserAsset({
+      userId,
+      assetId,
+      purchasePrice: asset.price,
+      transactionHash: `vt-${Date.now()}-${Math.floor(Math.random() * 1000)}` // 创建虚拟交易哈希
+    });
+    
+    // 更新品牌交易量
+    const brand = this.brands.get(asset.brandId);
+    if (brand) {
+      brand.volume = (brand.volume || 0) + asset.price;
+      this.brands.set(brand.id, brand);
+    }
+    
+    return {
+      userAsset,
+      user: updatedUser
+    };
   }
 }
 

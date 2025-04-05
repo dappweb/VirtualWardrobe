@@ -113,7 +113,54 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Purchase Asset API
+  // 查询用户代币余额
+  app.get("/api/wallet/balance", async (req, res) => {
+    if (!req.isAuthenticated()) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    
+    try {
+      const userId = req.user!.id;
+      const balance = await storage.getUserTokenBalance(userId);
+      res.json({ balance });
+    } catch (error) {
+      res.status(500).json({ error: "获取代币余额失败" });
+    }
+  });
+  
+  // 充值代币（演示用途）
+  app.post("/api/wallet/recharge", async (req, res) => {
+    if (!req.isAuthenticated()) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    
+    try {
+      const userId = req.user!.id;
+      const schema = z.object({
+        amount: z.number().positive(),
+      });
+      
+      const { amount } = schema.parse(req.body);
+      const user = await storage.updateUserTokenBalance(userId, amount);
+      
+      if (!user) {
+        return res.status(404).json({ error: "找不到用户" });
+      }
+      
+      res.json({ 
+        success: true, 
+        balance: user.tokenBalance,
+        message: `已成功充值 ${amount} 代币` 
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ error: "数据格式无效", details: error.errors });
+      }
+      res.status(500).json({ error: "充值失败" });
+    }
+  });
+  
+  // Purchase Asset API - 使用虚拟代币
   app.post("/api/assets/:id/purchase", async (req, res) => {
     if (!req.isAuthenticated()) {
       return res.status(401).json({ error: "Unauthorized" });
@@ -141,18 +188,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: "You already own this asset" });
       }
       
-      // Process transaction (simplified for MVP)
-      const { transactionHash } = req.body;
-      
-      const userAsset = await storage.createUserAsset({
-        userId,
-        assetId,
-        purchasePrice: asset.price,
-        transactionHash,
-      });
-      
-      res.status(201).json({ success: true, userAsset });
+      // 使用虚拟代币购买资产
+      try {
+        const result = await storage.purchaseAsset(userId, assetId);
+        if (!result) {
+          return res.status(500).json({ error: "购买失败" });
+        }
+        
+        const { userAsset, user } = result;
+        
+        res.status(201).json({ 
+          success: true, 
+          userAsset,
+          balance: user.tokenBalance,
+          message: `恭喜您成功购买了 ${asset.name}` 
+        });
+      } catch (e: any) {
+        return res.status(400).json({ error: e.message || "购买资产失败" });
+      }
     } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ error: "数据格式无效", details: error.errors });
+      }
       res.status(500).json({ error: "Failed to purchase asset" });
     }
   });
